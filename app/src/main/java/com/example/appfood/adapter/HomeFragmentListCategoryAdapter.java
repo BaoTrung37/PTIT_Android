@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.model.Category;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class HomeFragmentListCategoryAdapter extends RecyclerView.Adapter<HomeFr
             return;
         }
         holder.title.setText(category.getTitle());
-        holder.anh.setImageURI(Uri.parse(category.getImage()));
+        Picasso.get().load(category.getImage()).into(holder.anh);
     }
 
     @Override
