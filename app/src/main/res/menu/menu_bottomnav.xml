@@ -18,7 +18,7 @@
         android:title="Thông báo" />
     <item
         app:showAsAction="withText"
-        android:id="@+id/user"
+        android:id="@+id/account"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Tài khoản" />
 </menu>

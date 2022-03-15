@@ -7,8 +7,11 @@
     <FrameLayout
         android:id="@+id/framelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/bottomNav"/>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"
+        android:layout_alignTop="@+id/bottomNav"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="4dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"

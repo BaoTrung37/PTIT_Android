@@ -8,14 +8,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.appfood.fragment.AccountFragment;
+import com.example.appfood.fragment.CartFragment;
 import com.example.appfood.fragment.HomeFragment;
+import com.example.appfood.fragment.NotificationFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemReselectedListener
-{
+public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     BottomNavigationView navigationView;
-    FrameLayout frameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,18 +29,34 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
     private void inItData() {
         navigationView = findViewById(R.id.bottomNav);
+        navigationView.setOnItemSelectedListener(this);
         // start with screen home
         getFragment(new HomeFragment());
     }
 
-    @Override
-    public void onNavigationItemReselected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.home:
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragmentSelected;
+        switch (item.getItemId()) {
+            case R.id.cart:
+                fragmentSelected = new CartFragment();
+                break;
+            case R.id.notification:
+                fragmentSelected = new NotificationFragment();
+                break;
+            case R.id.account:
+                fragmentSelected = new AccountFragment();
+                break;
+            default:
+                fragmentSelected = new HomeFragment();
         }
+        getFragment(fragmentSelected);
+
+        return true;
     }
-    private void getFragment(Fragment fragment){
+
+    private void getFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, fragment).commit();
     }
 }
