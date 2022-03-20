@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item"
     android:layout_width="150dp"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="15dp"
-    android:id="@+id/item"
     android:layout_marginRight="20dp"
+    app:cardCornerRadius="15dp"
     app:cardElevation="8dp">
 
     <RelativeLayout
@@ -35,57 +35,52 @@
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
-            <RelativeLayout
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+            <TextView
+                android:id="@+id/item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="160,000đ"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:textColor="@color/black"
-                        android:id="@+id/item_price_discount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="160,000đ"
-                        android:textSize="14dp" />
-
-                    <TextView
-                        android:id="@+id/item_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/bg_strikethrough"
-                        android:text="200000đ"
-                        android:textColor="@color/black"
-                        android:textSize="12dp" />
-
-                </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
 
                 <TextView
-                    android:id="@+id/item_discount"
-                    android:layout_width="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
                     android:background="@drawable/border_width1"
-                    android:padding="3dp"
-                    android:text="Giảm 5%"
-                    android:textSize="10dp" />
-            </RelativeLayout>
+                    android:gravity="center"
+                    android:text="Free Ship" />
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_width1"
+                    android:gravity="center"
+                    android:text="Giảm 10k" />
+            </LinearLayout>
+
         </LinearLayout>
+
         <TextView
-            android:textSize="10dp"
-            android:background="#FF0000"
-            android:textColor="@color/white"
-            android:paddingLeft="5dp"
-            android:text="Flash sale $ "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="#FF0000"
+            android:paddingLeft="5dp"
+            android:text="Yêu thích"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

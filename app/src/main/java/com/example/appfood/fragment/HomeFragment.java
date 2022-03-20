@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.adapter.HomeFragmentListCategoryAdapter;
+import com.example.appfood.adapter.HomeFragmentListFavoriteAdapter;
 import com.example.appfood.adapter.HomeFragmentListFlashSaleAdapter;
 import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
@@ -32,12 +33,15 @@ public class HomeFragment extends Fragment {
     //widget
     RecyclerView recyclerListCategory;
     RecyclerView recyclerListFlashSale;
+    RecyclerView recyclerListFavorite;
     // adapter
     HomeFragmentListCategoryAdapter homeFragmentListCategoryAdapter;
     HomeFragmentListFlashSaleAdapter homeFragmentListFlashSaleAdapter;
+    HomeFragmentListFavoriteAdapter homeFragmentListFavoriteAdapter;
     // list
     List<Category> categoryList;
     List<Product> productList;
+    List<Product> favoriteList;
     //Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -86,20 +90,28 @@ public class HomeFragment extends Fragment {
         //
         categoryList = new ArrayList<>();
         productList = new ArrayList<>();
+        favoriteList = new ArrayList<>();
+        // find by id
         recyclerListCategory = view.findViewById(R.id.recycler_category);
         recyclerListFlashSale = view.findViewById(R.id.recycler_flash_sale);
+        recyclerListFavorite = view.findViewById(R.id.recycler_favorite);
 
         homeFragmentListCategoryAdapter = new HomeFragmentListCategoryAdapter(categoryList);
         homeFragmentListFlashSaleAdapter = new HomeFragmentListFlashSaleAdapter(productList);
+        homeFragmentListFavoriteAdapter = new HomeFragmentListFavoriteAdapter(favoriteList);
 
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.HORIZONTAL, false);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManagerFlashsale = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManagerFavorite = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+
         recyclerListCategory.setLayoutManager(gridLayoutManager);
         recyclerListCategory.setAdapter(homeFragmentListCategoryAdapter);
 
-        recyclerListFlashSale.setLayoutManager(layoutManager);
+        recyclerListFlashSale.setLayoutManager(layoutManagerFlashsale);
         recyclerListFlashSale.setAdapter(homeFragmentListFlashSaleAdapter);
 
+        recyclerListFavorite.setLayoutManager(layoutManagerFavorite);
+        recyclerListFavorite.setAdapter(homeFragmentListFavoriteAdapter);
     }
 
     private void fakeData() {
@@ -114,5 +126,15 @@ public class HomeFragment extends Fragment {
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
         productList.add(new Product("3", "Ga chien xao sa ơt",
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+
+        favoriteList.add(new Product("1", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+        favoriteList.add(new Product("2", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+        favoriteList.add(new Product("3", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+
+
+
     }
 }
