@@ -14,7 +14,6 @@ import com.example.appfood.R;
 import com.example.appfood.model.Product;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFragmentListProductAdapter.ViewHolder> {
