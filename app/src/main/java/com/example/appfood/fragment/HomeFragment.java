@@ -17,6 +17,7 @@ import com.example.appfood.R;
 import com.example.appfood.adapter.HomeFragmentListCategoryAdapter;
 import com.example.appfood.adapter.HomeFragmentListFavoriteAdapter;
 import com.example.appfood.adapter.HomeFragmentListFlashSaleAdapter;
+import com.example.appfood.adapter.HomeFragmentListProductAdapter;
 import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,14 +35,17 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerListCategory;
     RecyclerView recyclerListFlashSale;
     RecyclerView recyclerListFavorite;
+    RecyclerView recyclerListProduct;
     // adapter
     HomeFragmentListCategoryAdapter homeFragmentListCategoryAdapter;
     HomeFragmentListFlashSaleAdapter homeFragmentListFlashSaleAdapter;
     HomeFragmentListFavoriteAdapter homeFragmentListFavoriteAdapter;
+    HomeFragmentListProductAdapter homeFragmentListProductAdapter;
     // list
     List<Category> categoryList;
+    List<Product> flashsaleProductList;
+    List<Product> favoriteProductList;
     List<Product> productList;
-    List<Product> favoriteList;
     //Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -89,21 +93,26 @@ public class HomeFragment extends Fragment {
     private void inItData(View view) {
         //
         categoryList = new ArrayList<>();
+        flashsaleProductList = new ArrayList<>();
+        favoriteProductList = new ArrayList<>();
         productList = new ArrayList<>();
-        favoriteList = new ArrayList<>();
         // find by id
         recyclerListCategory = view.findViewById(R.id.recycler_category);
         recyclerListFlashSale = view.findViewById(R.id.recycler_flash_sale);
         recyclerListFavorite = view.findViewById(R.id.recycler_favorite);
+        recyclerListProduct = view.findViewById(R.id.recycler_product);
 
+        //
         homeFragmentListCategoryAdapter = new HomeFragmentListCategoryAdapter(categoryList);
-        homeFragmentListFlashSaleAdapter = new HomeFragmentListFlashSaleAdapter(productList);
-        homeFragmentListFavoriteAdapter = new HomeFragmentListFavoriteAdapter(favoriteList);
+        homeFragmentListFlashSaleAdapter = new HomeFragmentListFlashSaleAdapter(flashsaleProductList);
+        homeFragmentListFavoriteAdapter = new HomeFragmentListFavoriteAdapter(favoriteProductList);
+        homeFragmentListProductAdapter = new HomeFragmentListProductAdapter(productList);
 
+        //
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.HORIZONTAL, false);
         RecyclerView.LayoutManager layoutManagerFlashsale = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         RecyclerView.LayoutManager layoutManagerFavorite = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
-
+        RecyclerView.LayoutManager layoutManagerProduct = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         recyclerListCategory.setLayoutManager(gridLayoutManager);
         recyclerListCategory.setAdapter(homeFragmentListCategoryAdapter);
 
@@ -112,6 +121,9 @@ public class HomeFragment extends Fragment {
 
         recyclerListFavorite.setLayoutManager(layoutManagerFavorite);
         recyclerListFavorite.setAdapter(homeFragmentListFavoriteAdapter);
+
+        recyclerListProduct.setLayoutManager(layoutManagerProduct);
+        recyclerListProduct.setAdapter(homeFragmentListProductAdapter);
     }
 
     private void fakeData() {
@@ -120,18 +132,25 @@ public class HomeFragment extends Fragment {
         categoryList.add(new Category("3", "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "hehe"));
         categoryList.add(new Category("4", "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "hehe"));
 
+        flashsaleProductList.add(new Product("1", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+        flashsaleProductList.add(new Product("2", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+        flashsaleProductList.add(new Product("3", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+
+        favoriteProductList.add(new Product("1", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+        favoriteProductList.add(new Product("2", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+        favoriteProductList.add(new Product("3", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+
         productList.add(new Product("1", "Ga chien xao sa ơt",
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
         productList.add(new Product("2", "Ga chien xao sa ơt",
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
         productList.add(new Product("3", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-
-        favoriteList.add(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        favoriteList.add(new Product("2", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        favoriteList.add(new Product("3", "Ga chien xao sa ơt",
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
 
 
