@@ -5,6 +5,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +29,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
+    ViewFlipper viewFlipper;
     //widget
     RecyclerView recyclerListCategory;
     RecyclerView recyclerListFlashSale;
@@ -46,6 +53,7 @@ public class HomeFragment extends Fragment {
     List<Product> flashsaleProductList;
     List<Product> favoriteProductList;
     List<Product> productList;
+    List<String> imageQCList;
     //Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -63,6 +71,24 @@ public class HomeFragment extends Fragment {
         inItData(view);
         fakeData();
 //        test();
+        hienQuangCao();
+    }
+
+    private void hienQuangCao() {
+        for(String image: imageQCList){
+            ImageView imageView = new ImageView(getContext());
+            TextView textView = new TextView(getContext());
+            textView.setText("hhahaha");
+            Picasso.get().load(image).into(imageView);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            viewFlipper.addView(imageView);
+        }
+        viewFlipper.setFlipInterval(3000);
+        viewFlipper.startFlipping();
+        Animation animation_slide_in = AnimationUtils.loadAnimation(getActivity(), R.anim.advertisement_slide_in_right);
+        Animation animation_slide_out = AnimationUtils.loadAnimation(getActivity(), R.anim.advertisement_slide_out_right);
+        viewFlipper.setInAnimation(animation_slide_in);
+        viewFlipper.setOutAnimation(animation_slide_out);
     }
 
     private void test() {
@@ -101,13 +127,13 @@ public class HomeFragment extends Fragment {
         recyclerListFlashSale = view.findViewById(R.id.recycler_flash_sale);
         recyclerListFavorite = view.findViewById(R.id.recycler_favorite);
         recyclerListProduct = view.findViewById(R.id.recycler_product);
-
+        viewFlipper = view.findViewById(R.id.viewFlipper);
         //
         homeFragmentListCategoryAdapter = new HomeFragmentListCategoryAdapter(categoryList);
         homeFragmentListFlashSaleAdapter = new HomeFragmentListFlashSaleAdapter(flashsaleProductList);
         homeFragmentListFavoriteAdapter = new HomeFragmentListFavoriteAdapter(favoriteProductList);
         homeFragmentListProductAdapter = new HomeFragmentListProductAdapter(productList);
-
+        imageQCList = new ArrayList<>();
         //
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.HORIZONTAL, false);
         RecyclerView.LayoutManager layoutManagerFlashsale = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
@@ -153,7 +179,10 @@ public class HomeFragment extends Fragment {
         productList.add(new Product("3", "Ga chien xao sa ơt",
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
 
-
-
+        imageQCList.add("https://intphcm.com/data/upload/poster-do-an.jpg");
+        imageQCList.add("https://intphcm.com/data/upload/poster-do-an-dong-gia.jpg");
+        imageQCList.add("https://intphcm.com/data/upload/poster-tra-sua-doc-dao.jpg");
+        imageQCList.add("https://intphcm.com/data/upload/poster-do-an-nhanh.jpg");
+        imageQCList.add("https://intphcm.com/data/upload/poster-tra-sua-gongcha.jpg");
     }
 }

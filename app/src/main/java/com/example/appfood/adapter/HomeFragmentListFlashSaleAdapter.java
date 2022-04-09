@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
-import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
 import com.squareup.picasso.Picasso;
 

@@ -15,6 +15,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
@@ -24,6 +25,7 @@
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="50dp"
         app:fabCradleVerticalOffset="6dp"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/menu_bottomnav" />
 
 
