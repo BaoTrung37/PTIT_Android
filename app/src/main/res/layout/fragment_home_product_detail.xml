@@ -19,11 +19,11 @@
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
             <ImageView
-                android:id="@+id/image_title"
+                android:id="@+id/img_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/img_mon_an"
                 app:layout_collapseMode="parallax" />
 
             <View
@@ -41,7 +41,9 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
                 app:layout_collapseMode="pin">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/imbt_back"
+                    android:background="@android:color/transparent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_arrow_back_24" />
@@ -63,7 +65,7 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/product_name"
+                android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Vịt quay Bắc Kinh"
@@ -78,7 +80,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/product_price"
+                    android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -92,6 +94,7 @@
                     android:layout_height="wrap_content">
 
                     <ImageButton
+                        android:id="@+id/imbt_minus"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/img_minus_small"
@@ -100,6 +103,7 @@
                         android:padding="10dp" />
 
                     <TextView
+                        android:id="@+id/tv_amount"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:layout_gravity="center"
@@ -109,6 +113,7 @@
                         android:layout_height="wrap_content" />
 
                     <ImageButton
+                        android:id="@+id/tv_plus"
                         android:layout_height="40dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/img_plus_small"
@@ -132,6 +137,7 @@
                 android:textSize="18dp" />
 
             <TextView
+                android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -144,6 +150,50 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorGrey" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/product_ic_star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/img_star" />
+
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/product_ic_star"
+                    android:text="4.0"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="Nhận xét"
+                    android:textColor="@color/colorPrimary" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorGrey" />
+            <TextView
+                android:text="Các món ăn cùng loại"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="30dp"
+                android:id="@+id/recycler_product_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

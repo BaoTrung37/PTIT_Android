@@ -74,24 +74,10 @@ public class HomeFragment extends Fragment implements IFragmentHome {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        inItToolBar(view);
         inItData(view);
         fakeData();
 //        test();
         hienQuangCao();
-    }
-
-    private void inItToolBar(View view) {
-        Toolbar toolbar = view.findViewById(R.id.toolBar);
-//
-//
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setIcon(R.drawable.ic_baseline_arrow_back_24);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-//        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
-
-//        if(((AppCompatActivity) getActivity()).getSupportActionBar() != null){
-//            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        }
     }
 
     private void hienQuangCao() {
