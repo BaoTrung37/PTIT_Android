@@ -90,13 +90,15 @@
                     android:layout_width="wrap_content"
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
+
                     <ImageButton
-                        android:padding="5dp"
+                        android:layout_height="40dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/img_minus_small"
                         android:layout_width="40dp"
                         android:scaleType="centerCrop"
-                        android:layout_height="40dp"/>
+                        android:padding="10dp" />
+
                     <TextView
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -104,16 +106,44 @@
                         android:text="0"
                         android:textSize="20dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
+
                     <ImageButton
-                        android:padding="5dp"
+                        android:layout_height="40dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/img_plus_small"
                         android:layout_width="40dp"
                         android:scaleType="centerCrop"
-                        android:layout_height="40dp"/>
+                        android:padding="10dp" />
                 </LinearLayout>
             </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorGrey" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Mô tả"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Ngon \nNgon \nNgon" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorGrey" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

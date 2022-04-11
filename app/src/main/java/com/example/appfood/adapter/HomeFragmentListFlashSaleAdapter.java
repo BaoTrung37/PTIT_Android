@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.model.Product;
+import com.example.appfood.presenter.FragmentHomePresenter;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -19,10 +20,14 @@ import java.util.List;
 
 public class HomeFragmentListFlashSaleAdapter extends RecyclerView.Adapter<HomeFragmentListFlashSaleAdapter.ViewHolder> {
     List<Product> list;
-
+    FragmentHomePresenter fragmentHomePresenter;
 
     public HomeFragmentListFlashSaleAdapter(List<Product> list) {
         this.list = list;
+    }
+
+    public void setFragmentHomePresenter(FragmentHomePresenter fragmentHomePresenter) {
+        this.fragmentHomePresenter = fragmentHomePresenter;
     }
 
     @NonNull
@@ -52,7 +57,7 @@ public class HomeFragmentListFlashSaleAdapter extends RecyclerView.Adapter<HomeF
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView anh;
         TextView title,price_discount,price,discount;
         CardView item;
@@ -65,6 +70,15 @@ public class HomeFragmentListFlashSaleAdapter extends RecyclerView.Adapter<HomeF
             price = itemView.findViewById(R.id.item_price);
             price_discount = itemView.findViewById(R.id.item_price_discount);
             discount = itemView.findViewById(R.id.item_discount);
+            item.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.item:
+                    fragmentHomePresenter.onCLickProduct(list.get(getAdapterPosition()).getId());
+            }
         }
     }
 }

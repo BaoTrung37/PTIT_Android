@@ -157,6 +157,7 @@ public class HomeFragment extends Fragment implements IFragmentHome {
         homeFragmentListProductAdapter = new HomeFragmentListProductAdapter(productList);
         imageQCList = new ArrayList<>();
         // xét presenter
+        homeFragmentListFlashSaleAdapter.setFragmentHomePresenter(fragmentHomePresenter);
         homeFragmentListProductAdapter.setFragmentHomePresenter(fragmentHomePresenter);
         //
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.HORIZONTAL, false);
