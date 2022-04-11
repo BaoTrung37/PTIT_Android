@@ -9,10 +9,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,8 +26,10 @@ import com.example.appfood.adapter.HomeFragmentListCategoryAdapter;
 import com.example.appfood.adapter.HomeFragmentListFavoriteAdapter;
 import com.example.appfood.adapter.HomeFragmentListFlashSaleAdapter;
 import com.example.appfood.adapter.HomeFragmentListProductAdapter;
+import com.example.appfood.interfaces.IFragmentHome;
 import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
+import com.example.appfood.presenter.FragmentHomePresenter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -36,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements IFragmentHome {
     ViewFlipper viewFlipper;
     //widget
     RecyclerView recyclerListCategory;
@@ -54,6 +59,8 @@ public class HomeFragment extends Fragment {
     List<Product> favoriteProductList;
     List<Product> productList;
     List<String> imageQCList;
+    //presenter
+    FragmentHomePresenter fragmentHomePresenter;
     //Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -67,11 +74,24 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        inItToolBar(view);
         inItData(view);
         fakeData();
 //        test();
         hienQuangCao();
+    }
+
+    private void inItToolBar(View view) {
+        Toolbar toolbar = view.findViewById(R.id.toolBar);
+//
+//
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setIcon(R.drawable.ic_baseline_arrow_back_24);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
+//        if(((AppCompatActivity) getActivity()).getSupportActionBar() != null){
+//            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        }
     }
 
     private void hienQuangCao() {
@@ -129,11 +149,15 @@ public class HomeFragment extends Fragment {
         recyclerListProduct = view.findViewById(R.id.recycler_product);
         viewFlipper = view.findViewById(R.id.viewFlipper);
         //
+        fragmentHomePresenter = new FragmentHomePresenter(this);
+        //
         homeFragmentListCategoryAdapter = new HomeFragmentListCategoryAdapter(categoryList);
         homeFragmentListFlashSaleAdapter = new HomeFragmentListFlashSaleAdapter(flashsaleProductList);
         homeFragmentListFavoriteAdapter = new HomeFragmentListFavoriteAdapter(favoriteProductList);
         homeFragmentListProductAdapter = new HomeFragmentListProductAdapter(productList);
         imageQCList = new ArrayList<>();
+        // xét presenter
+        homeFragmentListProductAdapter.setFragmentHomePresenter(fragmentHomePresenter);
         //
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.HORIZONTAL, false);
         RecyclerView.LayoutManager layoutManagerFlashsale = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
@@ -184,5 +208,11 @@ public class HomeFragment extends Fragment {
         imageQCList.add("https://intphcm.com/data/upload/poster-tra-sua-doc-dao.jpg");
         imageQCList.add("https://intphcm.com/data/upload/poster-do-an-nhanh.jpg");
         imageQCList.add("https://intphcm.com/data/upload/poster-tra-sua-gongcha.jpg");
+    }
+
+    @Override
+    public void onCLick() {
+        HomeProductDetailFragment homeProductDetailFragment = new HomeProductDetailFragment();
+        getFragmentManager().beginTransaction().replace(R.id.framelayout, homeProductDetailFragment).addToBackStack("homeProductDetailFragment").commit();
     }
 }

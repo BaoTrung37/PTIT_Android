@@ -12,16 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.model.Product;
+import com.example.appfood.presenter.FragmentHomePresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFragmentListProductAdapter.ViewHolder> {
+public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFragmentListProductAdapter.ViewHolder>{
     List<Product> list;
-
+    FragmentHomePresenter fragmentHomePresenter;
 
     public HomeFragmentListProductAdapter(List<Product> list) {
         this.list = list;
+    }
+
+    public void setFragmentHomePresenter(FragmentHomePresenter fragmentHomePresenter) {
+        this.fragmentHomePresenter = fragmentHomePresenter;
     }
 
     @NonNull
@@ -48,7 +53,7 @@ public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFra
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView anh;
         TextView title,rate;
         CardView item;
@@ -59,6 +64,16 @@ public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFra
             anh = itemView.findViewById(R.id.item_image);
             title = itemView.findViewById(R.id.item_title);
             rate = itemView.findViewById(R.id.item_rate);
+            item.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.item:
+                    fragmentHomePresenter.onCLickProduct(list.get(getAdapterPosition()).getId());
+
+            }
         }
     }
 }
