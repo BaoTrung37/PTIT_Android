@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.appfood.R;
 
-public class RatingFragment extends Fragment {
+public class ReviewFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

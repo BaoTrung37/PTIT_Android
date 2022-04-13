@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="10dp">
 
         <LinearLayout
@@ -43,6 +43,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/liner_5star"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
@@ -60,6 +61,7 @@
                     android:textSize="14dp" />
 
                 <TextView
+                    android:id="@+id/tv_5star_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -68,6 +70,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/liner_4star"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
@@ -85,6 +88,7 @@
                     android:textSize="14dp" />
 
                 <TextView
+                    android:id="@+id/tv_4star_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -93,6 +97,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/liner_3star"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
@@ -110,6 +115,7 @@
                     android:textSize="14dp" />
 
                 <TextView
+                    android:id="@+id/tv_3star_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -118,6 +124,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/liner_2star"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
@@ -135,6 +142,7 @@
                     android:textSize="14dp" />
 
                 <TextView
+                    android:id="@+id/tv_2star_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -143,6 +151,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/liner_1star"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
@@ -160,15 +169,22 @@
                     android:textSize="14dp" />
 
                 <TextView
+                    android:id="@+id/tv_1star_quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="(1)"
                     android:textSize="14dp" />
-            </LinearLayout>
 
+            </LinearLayout>
 
         </LinearLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerReviews"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 </LinearLayout>

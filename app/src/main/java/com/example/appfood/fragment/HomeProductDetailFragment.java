@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,9 +86,9 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
         switch (view.getId()) {
             case R.id.tv_comment:
                 Toast.makeText(getContext(),"Click Nhan xet",Toast.LENGTH_SHORT).show();
-                RatingFragment ratingFragment = new RatingFragment();
+                ReviewFragment reviewFragment = new ReviewFragment();
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.framelayout, ratingFragment).addToBackStack("ratingFragment").commit();
+                        .replace(R.id.framelayout, reviewFragment).addToBackStack("ratingFragment").commit();
                 break;
         }
     }
