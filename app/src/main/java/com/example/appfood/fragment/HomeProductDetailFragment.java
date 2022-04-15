@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,10 +21,10 @@ import com.example.appfood.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeProductDetailFragment extends Fragment {
+public class HomeProductDetailFragment extends Fragment implements View.OnClickListener {
 
     ImageView imgImage;
-    TextView tvName, tvPrice, tvDescription, tvRate, tvAmount;
+    TextView tvName, tvPrice, tvDescription, tvRate, tvAmount, tvComment;
     RecyclerView recyclerProductList;
 
     HomeProductDetailFragmentListProductAdapter homeProductDetailFragmentListProductAdapter;
@@ -40,7 +41,6 @@ public class HomeProductDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         initData(view);
         fakeData();
     }
@@ -53,6 +53,7 @@ public class HomeProductDetailFragment extends Fragment {
         tvName = view.findViewById(R.id.tv_name);
         tvPrice = view.findViewById(R.id.tv_price);
         tvRate = view.findViewById(R.id.tv_rating);
+        tvComment = view.findViewById(R.id.tv_comment);
         recyclerProductList = view.findViewById(R.id.recycler_product_list);
         //
         productList = new ArrayList<>();
@@ -63,6 +64,9 @@ public class HomeProductDetailFragment extends Fragment {
         RecyclerView.LayoutManager layoutManagerProduct = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         recyclerProductList.setLayoutManager(layoutManagerProduct);
         recyclerProductList.setAdapter(homeProductDetailFragmentListProductAdapter);
+
+        // Xet Listener
+        tvComment.setOnClickListener(this);
     }
 
     private void fakeData() {
@@ -77,4 +81,16 @@ public class HomeProductDetailFragment extends Fragment {
         productList.add(new Product("3", "Ga chien xao sa ơt",
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
     }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_comment:
+                Toast.makeText(getContext(),"Click Nhan xet",Toast.LENGTH_SHORT).show();
+                ReviewFragment reviewFragment = new ReviewFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.framelayout, reviewFragment).addToBackStack("ratingFragment").commit();
+                break;
+        }
+    }
+
 }

@@ -86,40 +86,41 @@
                     android:layout_marginTop="10dp"
                     android:text="200,000 đ"
                     android:textSize="20dp" />
+
                 <LinearLayout
-                    android:background="@drawable/border_with_1_ra10_primary"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/border_with_1_ra10_primary"
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imbt_minus"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/img_minus_small"
-                        android:layout_width="40dp"
+                        android:padding="5dp"
                         android:scaleType="centerCrop"
-                        android:padding="10dp" />
+                        android:src="@drawable/img_minus_small" />
 
                     <TextView
                         android:id="@+id/tv_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:layout_gravity="center"
                         android:text="0"
-                        android:textSize="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textSize="18dp" />
 
                     <ImageButton
                         android:id="@+id/tv_plus"
-                        android:layout_height="40dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:background="@android:color/transparent"
-                        android:src="@drawable/img_plus_small"
-                        android:layout_width="40dp"
+                        android:padding="5dp"
                         android:scaleType="centerCrop"
-                        android:padding="10dp" />
+                        android:src="@drawable/img_plus_small" />
                 </LinearLayout>
             </RelativeLayout>
 

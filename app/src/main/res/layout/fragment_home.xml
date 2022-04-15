@@ -25,7 +25,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/border_width1_ra10" />
+            android:background="@drawable/border_width1" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_category"
             android:layout_marginTop="50dp"
