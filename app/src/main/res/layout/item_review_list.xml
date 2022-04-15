@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:id="@+id/item"
     android:padding="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="30dp"
+        android:id="@+id/item_cri_avatar"
         android:layout_height="30dp"
         android:layout_gravity="top"
         android:src="@drawable/img_mon_an" />
@@ -18,12 +20,14 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/item_tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bảo Trung"
             android:textSize="14dp" />
 
         <RatingBar
+            android:id="@+id/item_ratingBar_star"
             android:layout_marginTop="5dp"
             style="?attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
@@ -35,20 +39,23 @@
             android:secondaryProgress="@android:color/transparent"
             android:stepSize="1" />
         <TextView
+            android:id="@+id/item_tv_comment"
             android:layout_marginTop="10dp"
             android:textSize="12dp"
             android:text="Món ăn này ngon lắm luôn á"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <ImageView
+            android:id="@+id/item_image"
             android:src="@drawable/img_mon_an"
             android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
             android:layout_width="70dp"
             android:layout_height="70dp"/>
         <TextView
+            android:id="@+id/item_tv_timePost"
             android:layout_marginTop="3dp"
-            android:textSize="8dp"
+            android:textSize="10dp"
             android:text="24-04-2022 23:04"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
