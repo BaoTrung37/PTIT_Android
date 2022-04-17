@@ -27,7 +27,7 @@
                     android:id="@+id/circle_information"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/img_ic_mon_an"
+                    android:src="@drawable/img_trung"
                     app:civ_border_width="2dp" />
 
                 <LinearLayout
