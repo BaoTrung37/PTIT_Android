@@ -39,7 +39,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/img_badge" />
+                        android:src="@drawable/img_ic_badge" />
 
                     <TextView
                         android:id="@+id/item_title"
@@ -108,7 +108,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/img_star" />
+                            android:src="@drawable/img_ic_star" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

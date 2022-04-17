@@ -11,7 +11,7 @@
         android:id="@+id/item_cri_avatar"
         android:layout_height="30dp"
         android:layout_gravity="top"
-        android:src="@drawable/img_mon_an" />
+        android:src="@drawable/img_ic_mon_an" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/item_image"
-            android:src="@drawable/img_mon_an"
+            android:src="@drawable/img_ic_mon_an"
             android:layout_marginTop="5dp"
             android:scaleType="centerCrop"
             android:layout_width="70dp"
