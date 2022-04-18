@@ -52,5 +52,6 @@
         android:background="@drawable/border_with_1_ra10_primary"
         android:text="Xác nhận"
         android:textAllCaps="false"
+        android:textSize="16dp"
         android:textColor="@color/white" />
 </LinearLayout>

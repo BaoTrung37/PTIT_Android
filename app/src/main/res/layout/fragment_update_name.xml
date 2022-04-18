@@ -25,42 +25,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Cập nhật giới tính" />
+                android:text="Cập nhật email" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RadioGroup
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="10dp">
 
-        <RadioButton
-            android:textSize="14dp"
-            android:id="@+id/rd_man"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimary"
-            android:text="Nam" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/border_width1_ra10"
+            android:hint="Họ và tên"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="10dp" />
 
-        <RadioButton
-            android:textSize="14dp"
-            android:id="@+id/rd_woman"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimary"
-            android:checked="true"
-            android:text="Nữ" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioButton
-            android:textSize="14dp"
-            android:id="@+id/rd_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/colorPrimary"
-            android:text="Khác" />
-    </RadioGroup>
 
     <Button
         android:layout_width="match_parent"
@@ -69,6 +53,6 @@
         android:background="@drawable/border_with_1_ra10_primary"
         android:text="Xác nhận"
         android:textAllCaps="false"
-        android:textSize="16dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 </LinearLayout>

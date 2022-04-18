@@ -28,6 +28,7 @@
                 android:text="Cập nhật thông tin" />
 
             <TextView
+                android:id="@+id/tv_save"
                 style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
             android:padding="5dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circle_avatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -84,6 +86,7 @@
             android:background="@color/black" />
 
         <LinearLayout
+            android:id="@+id/linear_name"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
@@ -122,6 +125,7 @@
             android:background="@color/black" />
 
         <LinearLayout
+            android:id="@+id/linear_sex"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
@@ -160,6 +164,7 @@
             android:background="@color/black" />
 
         <LinearLayout
+            android:id="@+id/linear_date_of_birth"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
@@ -198,6 +203,7 @@
             android:background="@color/black" />
 
         <LinearLayout
+            android:id="@+id/linear_email"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
@@ -236,6 +242,7 @@
             android:background="@color/black" />
 
         <LinearLayout
+            android:id="@+id/linear_phone"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
@@ -274,6 +281,7 @@
             android:background="@color/black" />
 
         <LinearLayout
+            android:id="@+id/linear_change_password"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
