@@ -306,5 +306,10 @@
                 android:padding="5dp"
                 android:src="@drawable/img_ic_right_arrow" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
     </LinearLayout>
 </LinearLayout>
