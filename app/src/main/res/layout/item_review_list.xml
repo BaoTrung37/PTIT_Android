@@ -11,7 +11,7 @@
         android:id="@+id/item_cri_avatar"
         android:layout_height="30dp"
         android:layout_gravity="top"
-        android:src="@drawable/img_ic_mon_an" />
+        android:src="@drawable/img_trung" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,11 +20,12 @@
         android:orientation="vertical">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/item_tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bảo Trung"
-            android:textSize="14dp" />
+            android:textSize="16dp" />
 
         <RatingBar
             android:id="@+id/item_ratingBar_star"
@@ -41,7 +42,7 @@
         <TextView
             android:id="@+id/item_tv_comment"
             android:layout_marginTop="10dp"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:text="Món ăn này ngon lắm luôn á"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
