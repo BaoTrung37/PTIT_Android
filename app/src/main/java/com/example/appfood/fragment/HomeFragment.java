@@ -9,13 +9,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,7 +23,7 @@ import com.example.appfood.adapter.HomeFragmentListCategoryAdapter;
 import com.example.appfood.adapter.HomeFragmentListFavoriteAdapter;
 import com.example.appfood.adapter.HomeFragmentListFlashSaleAdapter;
 import com.example.appfood.adapter.HomeFragmentListProductAdapter;
-import com.example.appfood.interfaces.IFragmentHome;
+import com.example.appfood.interfaces.IFragmentHomeListener;
 import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
 import com.example.appfood.presenter.FragmentHomePresenter;
@@ -41,7 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeFragment extends Fragment implements IFragmentHome {
+public class HomeFragment extends Fragment implements IFragmentHomeListener {
     ViewFlipper viewFlipper;
     //widget
     RecyclerView recyclerListCategory;
@@ -200,6 +197,8 @@ public class HomeFragment extends Fragment implements IFragmentHome {
     @Override
     public void onCLick() {
         HomeProductDetailFragment homeProductDetailFragment = new HomeProductDetailFragment();
-        getFragmentManager().beginTransaction().replace(R.id.framelayout, homeProductDetailFragment).addToBackStack("homeProductDetailFragment").commit();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.framelayout, homeProductDetailFragment)
+                .addToBackStack("homeProductDetailFragment").commit();
     }
 }

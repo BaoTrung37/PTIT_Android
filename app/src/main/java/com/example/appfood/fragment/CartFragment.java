@@ -1,6 +1,7 @@
 package com.example.appfood.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,13 @@ public class CartFragment extends Fragment {
     ViewPager viewPager;
 
     CartFragmentViewPagerAdapter cartFragmentViewPagerAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("CartFragmentOnCreate","CartFragmentOnCreate");
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,6 +51,8 @@ public class CartFragment extends Fragment {
     private void inIt(View view) {
         tabLayout= view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
-        cartFragmentViewPagerAdapter = new CartFragmentViewPagerAdapter(getActivity().getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        cartFragmentViewPagerAdapter = new CartFragmentViewPagerAdapter(
+                getChildFragmentManager(),
+                FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 }

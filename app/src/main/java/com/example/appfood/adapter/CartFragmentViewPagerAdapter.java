@@ -24,8 +24,6 @@ public class CartFragmentViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return new CartShoppingCartFragment();
             case 1:
                 return new CartOrdersPendingFragment();
             case 2:
@@ -48,8 +46,6 @@ public class CartFragmentViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
-                return "Giỏ hàng";
             case 1:
                 return "Chờ xác nhận";
             case 2:

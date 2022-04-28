@@ -1,15 +1,18 @@
 package com.example.appfood.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +28,7 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
 
     ImageView imgImage;
     TextView tvName, tvPrice, tvDescription, tvRate, tvAmount, tvComment;
+    ImageButton imgBack;
     RecyclerView recyclerProductList;
 
     HomeProductDetailFragmentListProductAdapter homeProductDetailFragmentListProductAdapter;
@@ -43,9 +47,21 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
         initData(view);
         fakeData();
+        onBack(view);
+    }
+
+    private void onBack(View view) {
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
     }
 
     private void initData(View view) {
+        imgBack = view.findViewById(R.id.imbt_back);
         imgImage = view.findViewById(R.id.img_image);
         tvName = view.findViewById(R.id.tv_name);
         tvAmount = view.findViewById(R.id.tv_amount);

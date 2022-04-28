@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:buttonTint="@color/colorPrimary"
-                android:text="Mua tất" />
+                android:text="Mua tất"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -58,6 +58,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_order"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
