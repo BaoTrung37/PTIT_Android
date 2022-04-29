@@ -7,6 +7,8 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         app:tabMode="scrollable"
+        android:padding="10dp"
+        app:tabIndicatorColor="@color/colorPrimary"
         app:tabTextColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

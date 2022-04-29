@@ -1,5 +1,5 @@
 package com.example.appfood.interfaces;
 
-public interface IFragmentHome {
+public interface IFragmentHomeListener {
     void onCLick();
 }

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.appfood.fragment.CartCartFragment;
+import com.example.appfood.fragment.CartShoppingCartFragment;
 import com.example.appfood.fragment.CartOrdersCanceledFragment;
 import com.example.appfood.fragment.CartOrdersCompletedFragment;
 import com.example.appfood.fragment.CartOrdersDeliveringFragment;
@@ -24,8 +24,6 @@ public class CartFragmentViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return new CartCartFragment();
             case 1:
                 return new CartOrdersPendingFragment();
             case 2:
@@ -35,7 +33,7 @@ public class CartFragmentViewPagerAdapter extends FragmentStatePagerAdapter {
             case 4:
                 return new CartOrdersCanceledFragment();
             default:
-                return new CartCartFragment();
+                return new CartShoppingCartFragment();
         }
     }
 
@@ -48,8 +46,6 @@ public class CartFragmentViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
-                return "Giỏ hàng";
             case 1:
                 return "Chờ xác nhận";
             case 2:

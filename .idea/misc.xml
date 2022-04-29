@@ -25,10 +25,18 @@
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/drawable/border_width1_ra10.xml" value="0.1595" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/drawable/border_with_1_ra10_primary.xml" value="0.1595" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/drawable/border_with_2_black.xml" value="0.149" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1475" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_account.xml" value="0.264" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_address.xml" value="0.2477355072463768" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart.xml" value="0.25" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart_cart.xml" value="0.25" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart_ordersdelivering.xml" value="0.25" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart_orderspending.xml" value="0.25" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart_shopping_cart.xml" value="0.264" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_home.xml" value="0.24003623188405798" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_home_product_detail.xml" value="0.264" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_payment.xml" value="0.25" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_product_detail.xml" value="0.12158054711246201" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_rating.xml" value="0.24003623188405798" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_review.xml" value="0.4" />
@@ -38,6 +46,9 @@
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_update_name.xml" value="0.33" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_update_password.xml" value="0.3625" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_update_sex.xml" value="0.3625" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_cart_product_order_list.xml" value="0.25" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_cart_shopping_cart_list.xml" value="0.33783783783783783" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragmet_home_list_favorite.xml" value="0.3625" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragmet_home_list_flash_sale.xml" value="0.24003623188405798" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragmet_home_list_product.xml" value="0.24003623188405798" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragmet_home_product_detail_list_product.xml" value="0.24003623188405798" />

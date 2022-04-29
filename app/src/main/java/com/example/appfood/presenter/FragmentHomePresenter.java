@@ -1,14 +1,14 @@
 package com.example.appfood.presenter;
 
-import com.example.appfood.interfaces.IFragmentHome;
+import com.example.appfood.interfaces.IFragmentHomeListener;
 
 public class FragmentHomePresenter {
-    private IFragmentHome iFragmentHome;
+    private IFragmentHomeListener iFragmentHomeListener;
 
-    public FragmentHomePresenter(IFragmentHome iFragmentHome) {
-        this.iFragmentHome = iFragmentHome;
+    public FragmentHomePresenter(IFragmentHomeListener iFragmentHomeListener) {
+        this.iFragmentHomeListener = iFragmentHomeListener;
     }
     public void onCLickProduct(String id){
-        iFragmentHome.onCLick();
+        iFragmentHomeListener.onCLick();
     }
 }
