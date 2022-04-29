@@ -20,15 +20,6 @@ public class AddressFragment extends Fragment implements View.OnClickListener{
     Button btConfirm;
     SetAddress setAddress;
 
-//    static String address = "";
-//    public static AddressFragment newInstance() {
-//        Bundle args = new Bundle();
-//        args.putString("address",address);
-//        AddressFragment fragment = new AddressFragment();
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,14 +50,15 @@ public class AddressFragment extends Fragment implements View.OnClickListener{
             }
         });
     }
+
     public void setSetAddress(SetAddress setAddress){
         this.setAddress = setAddress;
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt_confirm:
-//                address = textInputEditTextAddress.getText().toString();
                 getParentFragmentManager().popBackStack();
                 setAddress.setAddress(textInputEditTextAddress.getText().toString());
                 break;

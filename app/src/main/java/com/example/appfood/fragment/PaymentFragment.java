@@ -22,15 +22,6 @@ public class PaymentFragment extends Fragment implements View.OnClickListener,Se
     
     TextView tvAddAddress,tvAddress;
 
-    public static PaymentFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        PaymentFragment fragment = new PaymentFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,5 +1,6 @@
 package com.example.appfood.interfaces;
 
 public interface IFragmentCartShoppingCartListener {
-    void onClick();
+    void setCheckedAll(boolean isCheck);
+    void setTotalPrice(double totalPrice);
 }
