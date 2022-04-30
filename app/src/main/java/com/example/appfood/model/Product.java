@@ -10,7 +10,6 @@ public class Product implements Serializable {
     private String type;
     private double discount;
     private String description;
-    private boolean isCheck;
 
     public Product(String id, String title, double price, String image, String type, double discount, String description) {
         this.id = id;
@@ -20,7 +19,6 @@ public class Product implements Serializable {
         this.type = type;
         this.discount = discount;
         this.description = description;
-        this.isCheck = false;
     }
 
     public String getId() {
@@ -77,14 +75,6 @@ public class Product implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public boolean isCheck() {
-        return isCheck;
-    }
-
-    public void setCheck(boolean check) {
-        isCheck = check;
     }
 }
 

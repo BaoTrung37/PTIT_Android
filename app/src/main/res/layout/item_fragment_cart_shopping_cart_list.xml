@@ -95,7 +95,7 @@
                             android:src="@drawable/img_ic_minus_small"  />
 
                         <TextView
-                            android:id="@+id/tv_amount"
+                            android:id="@+id/tv_quantity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"

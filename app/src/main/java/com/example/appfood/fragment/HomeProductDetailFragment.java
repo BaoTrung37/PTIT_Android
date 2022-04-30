@@ -1,7 +1,6 @@
 package com.example.appfood.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -64,7 +62,7 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
         imgBack = view.findViewById(R.id.imbt_back);
         imgImage = view.findViewById(R.id.img_image);
         tvName = view.findViewById(R.id.tv_name);
-        tvAmount = view.findViewById(R.id.tv_amount);
+        tvAmount = view.findViewById(R.id.tv_quantity);
         tvDescription = view.findViewById(R.id.tv_description);
         tvName = view.findViewById(R.id.tv_name);
         tvPrice = view.findViewById(R.id.tv_price);

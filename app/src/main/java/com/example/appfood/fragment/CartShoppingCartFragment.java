@@ -19,6 +19,7 @@ import com.example.appfood.R;
 import com.example.appfood.adapter.CartShoppingCartListAdapter;
 import com.example.appfood.interfaces.IFragmentCartShoppingCartListener;
 import com.example.appfood.model.Product;
+import com.example.appfood.model.ProductItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     TextView tvTotalPrice;
 
     CartShoppingCartListAdapter cartShoppingCartListAdapter;
-    List<Product> cartProductList;
+    List<ProductItem> cartProductList;
 
     @Nullable
     @Override
@@ -98,20 +99,13 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     }
 
     private void fakeData() {
-        cartProductList.add(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"));
-        cartProductList.add(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"));
-        cartProductList.add(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"));
-//        cartProductList.add(new Product("1", "Ga chien xao sa ơt",
-//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"));
-//        cartProductList.add(new Product("1", "Ga chien xao sa ơt",
-//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"));
-//        cartProductList.add(new Product("1", "Ga chien xao sa ơt",
-//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"));
-//        cartProductList.add(new Product("1", "Ga chien xao sa ơt",
-//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"));
+        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
+        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
+        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
+                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
+
     }
 
 
@@ -124,4 +118,5 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     public void setTotalPrice(double totalPrice) {
         tvTotalPrice.setText(totalPrice + " đ");
     }
+
 }
