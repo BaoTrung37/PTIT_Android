@@ -55,4 +55,5 @@ public class CartFragment extends Fragment {
                 getChildFragmentManager(),
                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
+
 }

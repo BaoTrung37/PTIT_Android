@@ -1,11 +1,15 @@
 package com.example.appfood.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +23,7 @@ import com.example.appfood.interfaces.IFragmentPaymentListener;
 public class PaymentFragment extends Fragment implements View.OnClickListener, IFragmentPaymentListener {
     
     TextView tvAddAddress,tvAddress;
+    Button btConfirm;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +58,11 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, I
     private void initData(View view) {
         tvAddAddress = view.findViewById(R.id.tv_add_address);
         tvAddress = view.findViewById(R.id.tv_address);
+        btConfirm = view.findViewById(R.id.bt_confirm);
 
+        // event
         tvAddAddress.setOnClickListener(this);
+        btConfirm.setOnClickListener(this);
     }
 
     @Override
@@ -68,7 +76,28 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, I
                         .addToBackStack("addressFragment")
                         .commit();
                 break;
+            case R.id.bt_confirm:
+                doOrder();
+                break;
         }
+    }
+
+    private void doOrder() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Đặt hàng thành công");
+        builder.setMessage("Đặt hàng thành công vui lòng kiểm tra hoá đơn");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                moveToPageOrderSpending();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void moveToPageOrderSpending() {
+        getParentFragmentManager().popBackStack();
     }
 
     @Override
