@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.appfood.R;
+import com.example.appfood.interfaces.IFragmentUpdateInformationListener;
 
-public class UpdateInformationFragment extends Fragment implements View.OnClickListener {
+public class UpdateInformationFragment extends Fragment implements View.OnClickListener , IFragmentUpdateInformationListener {
     LinearLayout linearName, linearSex, linearEmail, linearPhone, linearDateOfBirth, linearChangePassword;
 
     @Nullable
@@ -28,7 +30,7 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initData(view);
-
+        setToolBar(view);
     }
 
     private void initData(View view) {
@@ -50,12 +52,23 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
 
     }
 
+    private void setToolBar(View view) {
+        Toolbar toolbar = view.findViewById(R.id.toolBar);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.linear_name:
                 UpdateNameFragment updateNameFragment = new UpdateNameFragment();
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.framelayout,updateNameFragment)
                         .addToBackStack("updateNameFragment").commit();
                 break;
@@ -66,28 +79,58 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
                 break;
             case R.id.linear_sex:
                 UpdateSexFragment updateSexFragment = new UpdateSexFragment();
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.framelayout,updateSexFragment)
                         .addToBackStack("updateSexFragment").commit();
                 break;
             case R.id.linear_email:
                 UpdateEmailFragment updateEmailFragment = new UpdateEmailFragment();
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.framelayout,updateEmailFragment)
                         .addToBackStack("updateEmailFragment").commit();
                 break;
             case R.id.linear_change_password:
                 UpdatePasswordFragment updatePasswordFragment = new UpdatePasswordFragment();
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.framelayout,updatePasswordFragment)
                         .addToBackStack("updatePasswordFragment").commit();
                 break;
             case R.id.linear_date_of_birth:
                 UpdateDateOfBirthFragment updateDateOfBirthFragment = new UpdateDateOfBirthFragment();
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.framelayout,updateDateOfBirthFragment)
                         .addToBackStack("updateDateOfBirthFragment").commit();
                 break;
         }
+    }
+
+    @Override
+    public void setImage() {
+
+    }
+
+    @Override
+    public void setName(String name) {
+
+    }
+
+    @Override
+    public void setSex() {
+
+    }
+
+    @Override
+    public void setDateOfBirth(String dateOfBirth) {
+
+    }
+
+    @Override
+    public void setEmail(String email) {
+
+    }
+
+    @Override
+    public void setPhone(String phone) {
+
     }
 }

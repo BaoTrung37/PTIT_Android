@@ -42,7 +42,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.circle_information:
                 UpdateInformationFragment updateInformationFragment = new UpdateInformationFragment();
-                getFragmentManager().beginTransaction().replace(R.id.framelayout, updateInformationFragment)
+                getParentFragmentManager().beginTransaction().replace(R.id.framelayout, updateInformationFragment)
                         .addToBackStack("updateInformationFragment").commit();
                 break;
         }

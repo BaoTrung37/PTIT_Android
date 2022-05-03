@@ -14,11 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.appfood.R;
-interface SetAddress{
-    void setAddress(String address);
-}
+import com.example.appfood.interfaces.IFragmentPaymentListener;
 
-public class PaymentFragment extends Fragment implements View.OnClickListener,SetAddress {
+public class PaymentFragment extends Fragment implements View.OnClickListener, IFragmentPaymentListener {
     
     TextView tvAddAddress,tvAddress;
 
@@ -64,7 +62,7 @@ public class PaymentFragment extends Fragment implements View.OnClickListener,Se
         switch (view.getId()){
             case R.id.tv_add_address:
                 AddressFragment addressFragment = new AddressFragment();
-                addressFragment.setSetAddress(this);
+                addressFragment.setPaymentPresenter(this);
                 getParentFragmentManager().beginTransaction()
                         .add(R.id.framelayout,addressFragment)
                         .addToBackStack("addressFragment")

@@ -12,14 +12,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.appfood.R;
+import com.example.appfood.presenter.FragmentPaymentPresenter;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class AddressFragment extends Fragment implements View.OnClickListener{
 
     TextInputEditText textInputEditTextAddress;
     Button btConfirm;
-    SetAddress setAddress;
 
+    //
+    PaymentFragment paymentPresenter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,8 +37,12 @@ public class AddressFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData(View view) {
+        //
         textInputEditTextAddress = view.findViewById(R.id.textInputEditText_address);
         btConfirm = view.findViewById(R.id.bt_confirm);
+        //
+
+        // event
         btConfirm.setOnClickListener(this);
     }
 
@@ -51,8 +57,8 @@ public class AddressFragment extends Fragment implements View.OnClickListener{
         });
     }
 
-    public void setSetAddress(SetAddress setAddress){
-        this.setAddress = setAddress;
+    public void setPaymentPresenter(PaymentFragment paymentPresenter) {
+        this.paymentPresenter = paymentPresenter;
     }
 
     @Override
@@ -60,7 +66,7 @@ public class AddressFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()){
             case R.id.bt_confirm:
                 getParentFragmentManager().popBackStack();
-                setAddress.setAddress(textInputEditTextAddress.getText().toString());
+                paymentPresenter.setAddress(textInputEditTextAddress.getText().toString());
                 break;
         }
     }
