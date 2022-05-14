@@ -54,6 +54,12 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         return true;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
     private void getFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, fragment).commit();
     }
