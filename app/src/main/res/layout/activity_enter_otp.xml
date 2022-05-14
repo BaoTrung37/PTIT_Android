@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    tools:context=".SignInActivity">
+    tools:context=".EnterOTPActivity">
 
     <ImageView
         android:layout_width="300dp"
@@ -39,64 +38,47 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tedt_account"
+            android:id="@+id/tedt_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="admin@gmail.com"
-            android:hint="Tài khoản" />
+            android:hint="Nhập mã xác nhận"
+            android:inputType="numberDecimal"
+            android:maxLength="6" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-        android:layout_marginTop="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tedt_password"
-            android:layout_width="match_parent"
-            android:inputType="textPassword"
-            android:text="123456"
-            android:layout_height="wrap_content"
-            android:hint="Mật khẩu" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quên mật khẩu?"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="Bạn không nhận được mã?"
+            android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/tv_sign_in_otp"
+            android:id="@+id/tv_time"
+            android:layout_marginLeft="20dp"
+            android:text="60s"
+            android:textColor="#FF0000"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đăng nhập bằng OTP"
-            android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/bt_signin"
+        android:id="@+id/bt_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Đăng nhập"
+        android:text="Tiếp tục"
         android:textAllCaps="false"
         android:textSize="18dp" />
 
@@ -105,7 +87,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:layout_marginTop="20dp"
-        android:text="Bạn chưa có tài khoản? Hãy đăng kí"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/black"
+        android:text="Đăng nhập bằng cách khác"
         android:textSize="18dp" />
 </LinearLayout>

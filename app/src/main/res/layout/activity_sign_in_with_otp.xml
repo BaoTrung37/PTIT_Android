@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    tools:context=".SignInActivity">
+    tools:context=".SignInWithOTPActivity">
 
     <ImageView
         android:layout_width="300dp"
@@ -39,59 +39,31 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tedt_account"
+            android:id="@+id/tedt_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tài khoản" />
+            android:hint="Nhập số điện thoại" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tedt_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mật khẩu" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quên mật khẩu?"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đăng nhập bằng OTP"
-            android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:textColor="@color/purple_700"
+        android:text="Chúng tôi sẽ gửi mã xác nhận cho bạn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/bt_login"
+        android:id="@+id/bt_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Đăng nhập"
+        android:text="Tiếp tục"
         android:textAllCaps="false"
         android:textSize="18dp" />
 
@@ -100,7 +72,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:layout_marginTop="20dp"
-        android:text="Bạn chưa có tài khoản? Hãy đăng kí"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/black"
+        android:text="Đăng nhập bằng cách khác"
         android:textSize="18dp" />
 </LinearLayout>
