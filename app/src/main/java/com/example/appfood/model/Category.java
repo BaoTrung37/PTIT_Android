@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Category implements Serializable {
     private String id;
-    private String image;
+    private String imageUrl;
     private String title;
 
     public Category() {
     }
 
-    public Category(String id, String image, String title) {
+    public Category(String id, String imageUrl, String title) {
         this.id = id;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.title = title;
     }
 
@@ -24,12 +24,12 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {

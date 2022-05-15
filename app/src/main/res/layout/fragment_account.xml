@@ -314,5 +314,27 @@
             android:background="@color/black"
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
+        <LinearLayout
+            android:id="@+id/linear_more_logout"
+            android:padding="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" >
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                android:text="Đăng xuất"
+
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+        <View
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
     </LinearLayout>
 </LinearLayout>

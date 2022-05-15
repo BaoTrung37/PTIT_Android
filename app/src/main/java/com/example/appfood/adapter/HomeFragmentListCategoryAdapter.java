@@ -38,7 +38,7 @@ public class HomeFragmentListCategoryAdapter extends RecyclerView.Adapter<HomeFr
             return;
         }
         holder.title.setText(category.getTitle());
-        Picasso.get().load(category.getImage()).into(holder.anh);
+        Picasso.get().load(category.getImageUrl()).into(holder.anh);
     }
 
     @Override

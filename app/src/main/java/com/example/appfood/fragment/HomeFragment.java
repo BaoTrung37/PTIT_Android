@@ -1,5 +1,6 @@
 package com.example.appfood.fragment;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -27,19 +27,20 @@ import com.example.appfood.interfaces.IFragmentHomeListener;
 import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
 import com.example.appfood.presenter.FragmentHomePresenter;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HomeFragment extends Fragment implements IFragmentHomeListener {
-    ViewFlipper viewFlipper;
+
+    private static final String TAG = HomeFragment.class.getName();
+
     //widget
     RecyclerView recyclerListCategory;
     RecyclerView recyclerListFlashSale;
@@ -60,7 +61,6 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     FragmentHomePresenter fragmentHomePresenter;
     //Firebase
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,17 +71,22 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        inItData(view);
         fakeData();
-//        test();
-        hienQuangCao();
+        inItData(view);
+        hienQuangCao(view);
     }
 
-    private void hienQuangCao() {
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    private void hienQuangCao(View view) {
+        ViewFlipper viewFlipper;
+        viewFlipper = view.findViewById(R.id.viewFlipper);
+
         for(String image: imageQCList){
             ImageView imageView = new ImageView(getContext());
-            TextView textView = new TextView(getContext());
-            textView.setText("hhahaha");
             Picasso.get().load(image).into(imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             viewFlipper.addView(imageView);
@@ -94,43 +99,33 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         viewFlipper.setOutAnimation(animation_slide_out);
     }
 
-    private void test() {
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
-
-// Add a new document with a generated ID
-
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("TAG", "DocumentSnapshot added with ID: " + documentReference.getId());
+    private void initCategoryList(){
+        db.collection("category").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Category category = new Category();
+                        category.setId(document.getId());
+                            category.setTitle((String) document.get("title"));
+                        category.setImageUrl((String) document.get("imageUrl"));
+                        categoryList.add(category);
+                        Log.d("test","test");
+                        homeFragmentListCategoryAdapter.notifyDataSetChanged();
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error adding document", e);
-                    }
-                });
+                } else {
+                }
+            }
+        });
     }
 
+
     private void inItData(View view) {
-        //
-        categoryList = new ArrayList<>();
-        flashsaleProductList = new ArrayList<>();
-        favoriteProductList = new ArrayList<>();
-        productList = new ArrayList<>();
         // find by id
         recyclerListCategory = view.findViewById(R.id.recycler_category);
         recyclerListFlashSale = view.findViewById(R.id.recycler_flash_sale);
         recyclerListFavorite = view.findViewById(R.id.recycler_favorite);
         recyclerListProduct = view.findViewById(R.id.recycler_product);
-        viewFlipper = view.findViewById(R.id.viewFlipper);
         //
         fragmentHomePresenter = new FragmentHomePresenter(this);
         //
@@ -138,7 +133,6 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         homeFragmentListFlashSaleAdapter = new HomeFragmentListFlashSaleAdapter(flashsaleProductList);
         homeFragmentListFavoriteAdapter = new HomeFragmentListFavoriteAdapter(favoriteProductList);
         homeFragmentListProductAdapter = new HomeFragmentListProductAdapter(productList);
-        imageQCList = new ArrayList<>();
         // xét presenter
         homeFragmentListFlashSaleAdapter.setFragmentHomePresenter(fragmentHomePresenter);
         homeFragmentListProductAdapter.setFragmentHomePresenter(fragmentHomePresenter);
@@ -161,10 +155,15 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     }
 
     private void fakeData() {
-        categoryList.add(new Category("1", "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "Banh kem"));
-        categoryList.add(new Category("2", "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "hehe"));
-        categoryList.add(new Category("3", "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "hehe"));
-        categoryList.add(new Category("4", "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "hehe"));
+        //
+        categoryList = new ArrayList<>();
+        flashsaleProductList = new ArrayList<>();
+        favoriteProductList = new ArrayList<>();
+        productList = new ArrayList<>();
+        imageQCList = new ArrayList<>();
+
+//        new LoadData().execute();
+        initCategoryList();
 
         flashsaleProductList.add(new Product("1", "Ga chien xao sa ơt",
                 402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
@@ -201,4 +200,24 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
                 .replace(R.id.framelayout, homeProductDetailFragment)
                 .addToBackStack("homeProductDetailFragment").commit();
     }
+
+//    private  class LoadData extends AsyncTask<Void, Void, List<Category>> {
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected List<Category> doInBackground(Void... voids) {
+//            Log.d("Aize","123");
+//            return getCategoryList();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<Category> list) {
+//            super.onPostExecute(list);
+//            categoryList = list;
+//            homeFragmentListCategoryAdapter.notifyDataSetChanged();
+//        }
+//    }
 }
