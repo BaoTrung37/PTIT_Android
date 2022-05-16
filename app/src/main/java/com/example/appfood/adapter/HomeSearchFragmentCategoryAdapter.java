@@ -3,7 +3,6 @@ package com.example.appfood.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,27 +11,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.model.Category;
-import com.example.appfood.presenter.FragmentHomePresenter;
+import com.example.appfood.presenter.FragmentSearchPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class HomeFragmentListCategoryAdapter extends RecyclerView.Adapter<HomeFragmentListCategoryAdapter.ViewHolder> {
+public class HomeSearchFragmentCategoryAdapter extends RecyclerView.Adapter<HomeSearchFragmentCategoryAdapter.ViewHolder> {
     List<Category> list;
-    FragmentHomePresenter fragmentHomePresenter;
+    FragmentSearchPresenter fragmentSearchPresenter;
 
-    public HomeFragmentListCategoryAdapter(List<Category> list) {
+    public HomeSearchFragmentCategoryAdapter(List<Category> list) {
         this.list = list;
     }
 
-    public void setFragmentHomePresenter(FragmentHomePresenter fragmentHomePresenter) {
-        this.fragmentHomePresenter = fragmentHomePresenter;
+    public void setList(List<Category> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
+    public void setFragmentSearchPresenter(FragmentSearchPresenter fragmentSearchPresenter) {
+        this.fragmentSearchPresenter = fragmentSearchPresenter;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragmet_home_list_category,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_search_category_list,parent,false);
         return new ViewHolder(view);
     }
 
@@ -43,22 +47,18 @@ public class HomeFragmentListCategoryAdapter extends RecyclerView.Adapter<HomeFr
             return;
         }
         holder.title.setText(category.getTitle());
-        Picasso.get().load(category.getImageUrl()).into(holder.anh);
     }
 
     @Override
     public int getItemCount() {
-        if(list.isEmpty()) return 0;
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
-        ImageView anh;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         CardView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            anh = itemView.findViewById(R.id.item_image);
             title = itemView.findViewById(R.id.item_title);
             item = itemView.findViewById(R.id.item);
 
@@ -67,10 +67,7 @@ public class HomeFragmentListCategoryAdapter extends RecyclerView.Adapter<HomeFr
 
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.item:
-                    fragmentHomePresenter.onCLickCategory(list.get(getAdapterPosition()).getId());
-            }
+            fragmentSearchPresenter.onCLickCategory(list.get(getAdapterPosition()).getId());
         }
     }
 }

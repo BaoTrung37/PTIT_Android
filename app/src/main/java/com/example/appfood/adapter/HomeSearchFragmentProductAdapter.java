@@ -1,7 +1,5 @@
 package com.example.appfood.adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +11,29 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
-import com.example.appfood.fragment.HomeProductDetailFragment;
+import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
-import com.example.appfood.presenter.FragmentHomePresenter;
+import com.example.appfood.presenter.FragmentSearchPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFragmentListProductAdapter.ViewHolder>{
+public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeSearchFragmentProductAdapter.ViewHolder> {
     List<Product> list;
-    FragmentHomePresenter fragmentHomePresenter;
-    Context context;
+    FragmentSearchPresenter fragmentSearchPresenter;
 
-    public HomeFragmentListProductAdapter(List<Product> list, Context context) {
+    public HomeSearchFragmentProductAdapter(List<Product> list) {
         this.list = list;
-        this.context = context;
     }
 
-    public void setFragmentHomePresenter(FragmentHomePresenter fragmentHomePresenter) {
-        this.fragmentHomePresenter = fragmentHomePresenter;
+    public void setList(List<Product> list) {
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
+    public void setFragmentSearchPresenter(FragmentSearchPresenter fragmentSearchPresenter) {
+        this.fragmentSearchPresenter = fragmentSearchPresenter;
     }
 
     @NonNull
@@ -54,20 +55,10 @@ public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFra
         Picasso.get().load(product.getImage()).into(holder.anh);
 
         holder.rate.setText("5.0");
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, HomeProductDetailFragment.class);
-//                intent.putExtra("product",product);
-//                context.startActivity(intent);
-//            }
-//        });
     }
 
     @Override
     public int getItemCount() {
-        if(list.isEmpty()) return 0;
         return list.size();
     }
 
@@ -88,11 +79,7 @@ public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFra
 
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.item:
-                    fragmentHomePresenter.onCLickProduct(list.get(getAdapterPosition()).getId());
 
-            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.appfood.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -115,16 +116,17 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         // xét presenter
         homeFragmentListFlashSaleAdapter.setFragmentHomePresenter(fragmentHomePresenter);
         homeFragmentListProductAdapter.setFragmentHomePresenter(fragmentHomePresenter);
+        homeFragmentListCategoryAdapter.setFragmentHomePresenter(fragmentHomePresenter);
         //
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.HORIZONTAL, false);
-        RecyclerView.LayoutManager layoutManagerFlashsale = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManagerFlashSale = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         RecyclerView.LayoutManager layoutManagerFavorite = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         RecyclerView.LayoutManager layoutManagerProduct = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
 
         recyclerListCategory.setLayoutManager(gridLayoutManager);
         recyclerListCategory.setAdapter(homeFragmentListCategoryAdapter);
 
-        recyclerListFlashSale.setLayoutManager(layoutManagerFlashsale);
+        recyclerListFlashSale.setLayoutManager(layoutManagerFlashSale);
         recyclerListFlashSale.setAdapter(homeFragmentListFlashSaleAdapter);
 
         recyclerListFavorite.setLayoutManager(layoutManagerFavorite);
@@ -155,6 +157,11 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     }
 
     private void initCategoryList() {
+        ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setCancelable(false);
+        progress.show();
         db.collection("category").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -168,6 +175,7 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
                         Log.d("test", "test");
                         homeFragmentListCategoryAdapter.notifyDataSetChanged();
                     }
+                    progress.dismiss();
                 } else {
                 }
             }
@@ -175,12 +183,16 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     }
 
     private void initProductList() {
+        ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setCancelable(false);
+        progress.show();
         db.collection("product").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-//
                         Product product = new Product();
                         product.setId(document.getId());
                         product.setDescription((String) document.get("description"));
@@ -193,6 +205,7 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
                     }
                     Collections.shuffle(productList);
                     homeFragmentListProductAdapter.notifyDataSetChanged();
+                    progress.dismiss();
                 } else {
                 }
             }
@@ -200,6 +213,11 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     }
 
     private void initFlashSaleProductList() {
+        ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setCancelable(false);
+        progress.show();
         db.collection("product").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -217,6 +235,7 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
                     }
                     Collections.shuffle(flashsaleProductList);
                     homeFragmentListFlashSaleAdapter.notifyDataSetChanged();
+                    progress.dismiss();
                 } else {
                 }
             }
@@ -224,6 +243,11 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     }
 
     private void initFavoriteProductList() {
+        ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setCancelable(false);
+        progress.show();
         db.collection("product").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -241,6 +265,7 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
                     }
                     Collections.shuffle(favoriteProductList);
                     homeFragmentListFavoriteAdapter.notifyDataSetChanged();
+                    progress.dismiss();
                 } else {
                 }
             }
@@ -248,13 +273,24 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     }
 
     @Override
-    public void onCLick(String productId) {
+    public void onCLickProduct(String productId) {
         HomeProductDetailFragment homeProductDetailFragment = new HomeProductDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putString("productId", productId);
         homeProductDetailFragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
                 .replace(R.id.framelayout, homeProductDetailFragment)
+                .addToBackStack("homeProductDetailFragment").commit();
+    }
+
+    @Override
+    public void onClickCategory(String categoryId) {
+        SearchProductFragment searchProductFragment = new SearchProductFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("categoryId", categoryId);
+        searchProductFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.framelayout, searchProductFragment)
                 .addToBackStack("homeProductDetailFragment").commit();
     }
 
