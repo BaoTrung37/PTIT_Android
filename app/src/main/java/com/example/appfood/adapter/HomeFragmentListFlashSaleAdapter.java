@@ -43,18 +43,18 @@ public class HomeFragmentListFlashSaleAdapter extends RecyclerView.Adapter<HomeF
         if(product == null){
             return;
         }
-        holder.title.setText(product.getTitle());
+        holder.title.setText(product.getName());
         Picasso.get().load(product.getImage()).into(holder.anh);
         DecimalFormat dfVND = new DecimalFormat("###,###,###,###");
         holder.price.setText(dfVND.format(product.getPrice()) + " đ");
-        holder.price_discount.setText(dfVND.format(product.getPrice()) + " đ");
+        holder.price_discount.setText(dfVND.format(product.getPrice() * (1 - (product.getDiscount() / 100))) + " đ");
         holder.discount.setText("Giảm " + product.getDiscount() + " %");
     }
 
     @Override
     public int getItemCount() {
         if(list.isEmpty()) return 0;
-        return list.size();
+        return list.size() < 10 ? list.size() : 10;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

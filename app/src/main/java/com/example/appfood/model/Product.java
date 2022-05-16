@@ -4,21 +4,24 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
     private String id;
-    private String title;
+    private String name;
     private double price;
     private String image;
-    private String type;
+    private String category;
     private double discount;
     private String description;
 
-    public Product(String id, String title, double price, String image, String type, double discount, String description) {
+    public Product(String id, String name, double price, String image, String category, double discount, String description) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.price = price;
         this.image = image;
-        this.type = type;
+        this.category = category;
         this.discount = discount;
         this.description = description;
+    }
+
+    public Product() {
     }
 
     public String getId() {
@@ -29,12 +32,12 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice() {
@@ -53,12 +56,12 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    public String getType() {
-        return type;
+    public String getCategory() {
+        return category;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getDiscount() {

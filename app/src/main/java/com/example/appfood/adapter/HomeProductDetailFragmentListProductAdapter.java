@@ -14,6 +14,7 @@ import com.example.appfood.R;
 import com.example.appfood.model.Product;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeProductDetailFragmentListProductAdapter extends RecyclerView.Adapter<HomeProductDetailFragmentListProductAdapter.ViewHolder> {
@@ -21,6 +22,11 @@ public class HomeProductDetailFragmentListProductAdapter extends RecyclerView.Ad
 
     public HomeProductDetailFragmentListProductAdapter(List<Product> list) {
         this.list = list;
+    }
+
+    public void setList(List<Product> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -37,7 +43,7 @@ public class HomeProductDetailFragmentListProductAdapter extends RecyclerView.Ad
         if (product == null) {
             return;
         }
-        holder.title.setText(product.getTitle());
+        holder.title.setText(product.getName());
         Picasso.get().load(product.getImage()).into(holder.anh);
         holder.rate.setText("5.0");
     }

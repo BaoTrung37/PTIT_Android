@@ -15,11 +15,11 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@color/white"
         android:backgroundTint="@color/white"
         app:elevation="1dp"
         app:fabCradleMargin="10dp"

@@ -8,7 +8,7 @@ public class FragmentHomePresenter {
     public FragmentHomePresenter(IFragmentHomeListener iFragmentHomeListener) {
         this.iFragmentHomeListener = iFragmentHomeListener;
     }
-    public void onCLickProduct(String id){
-        iFragmentHomeListener.onCLick();
+    public void onCLickProduct(String productId){
+        iFragmentHomeListener.onCLick(productId);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.appfood.fragment;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,6 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements IFragmentHomeListener {
@@ -99,27 +99,6 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         viewFlipper.setOutAnimation(animation_slide_out);
     }
 
-    private void initCategoryList(){
-        db.collection("category").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Category category = new Category();
-                        category.setId(document.getId());
-                            category.setTitle((String) document.get("title"));
-                        category.setImageUrl((String) document.get("imageUrl"));
-                        categoryList.add(category);
-                        Log.d("test","test");
-                        homeFragmentListCategoryAdapter.notifyDataSetChanged();
-                    }
-                } else {
-                }
-            }
-        });
-    }
-
-
     private void inItData(View view) {
         // find by id
         recyclerListCategory = view.findViewById(R.id.recycler_category);
@@ -132,7 +111,7 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         homeFragmentListCategoryAdapter = new HomeFragmentListCategoryAdapter(categoryList);
         homeFragmentListFlashSaleAdapter = new HomeFragmentListFlashSaleAdapter(flashsaleProductList);
         homeFragmentListFavoriteAdapter = new HomeFragmentListFavoriteAdapter(favoriteProductList);
-        homeFragmentListProductAdapter = new HomeFragmentListProductAdapter(productList);
+        homeFragmentListProductAdapter = new HomeFragmentListProductAdapter(productList, getContext());
         // xét presenter
         homeFragmentListFlashSaleAdapter.setFragmentHomePresenter(fragmentHomePresenter);
         homeFragmentListProductAdapter.setFragmentHomePresenter(fragmentHomePresenter);
@@ -141,6 +120,7 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         RecyclerView.LayoutManager layoutManagerFlashsale = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         RecyclerView.LayoutManager layoutManagerFavorite = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         RecyclerView.LayoutManager layoutManagerProduct = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+
         recyclerListCategory.setLayoutManager(gridLayoutManager);
         recyclerListCategory.setAdapter(homeFragmentListCategoryAdapter);
 
@@ -162,29 +142,10 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         productList = new ArrayList<>();
         imageQCList = new ArrayList<>();
 
-//        new LoadData().execute();
         initCategoryList();
-
-        flashsaleProductList.add(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        flashsaleProductList.add(new Product("2", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        flashsaleProductList.add(new Product("3", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-
-        favoriteProductList.add(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        favoriteProductList.add(new Product("2", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        favoriteProductList.add(new Product("3", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-
-        productList.add(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        productList.add(new Product("2", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
-        productList.add(new Product("3", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "đíaádsda"));
+        initFlashSaleProductList();
+        initFavoriteProductList();
+        initProductList();
 
         imageQCList.add("https://intphcm.com/data/upload/poster-do-an.jpg");
         imageQCList.add("https://intphcm.com/data/upload/poster-do-an-dong-gia.jpg");
@@ -193,31 +154,109 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
         imageQCList.add("https://intphcm.com/data/upload/poster-tra-sua-gongcha.jpg");
     }
 
+    private void initCategoryList() {
+        db.collection("category").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Category category = new Category();
+                        category.setId(document.getId());
+                        category.setTitle((String) document.get("title"));
+                        category.setImageUrl((String) document.get("imageUrl"));
+                        categoryList.add(category);
+                        Log.d("test", "test");
+                        homeFragmentListCategoryAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                }
+            }
+        });
+    }
+
+    private void initProductList() {
+        db.collection("product").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+//
+                        Product product = new Product();
+                        product.setId(document.getId());
+                        product.setDescription((String) document.get("description"));
+                        product.setName((String) document.get("name"));
+                        product.setPrice(document.getDouble("price"));
+                        product.setDiscount(document.getDouble("discount"));
+                        product.setImage((String) document.get("image"));
+                        product.setCategory((String) document.get("categoryId"));
+                        productList.add(product);
+                    }
+                    Collections.shuffle(productList);
+                    homeFragmentListProductAdapter.notifyDataSetChanged();
+                } else {
+                }
+            }
+        });
+    }
+
+    private void initFlashSaleProductList() {
+        db.collection("product").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        product.setId(document.getId());
+                        product.setDescription((String) document.get("description"));
+                        product.setName((String) document.get("name"));
+                        product.setPrice(document.getDouble("price"));
+                        product.setDiscount(document.getDouble("discount"));
+                        product.setImage((String) document.get("image"));
+                        product.setCategory((String) document.get("categoryId"));
+                        flashsaleProductList.add(product);
+                    }
+                    Collections.shuffle(flashsaleProductList);
+                    homeFragmentListFlashSaleAdapter.notifyDataSetChanged();
+                } else {
+                }
+            }
+        });
+    }
+
+    private void initFavoriteProductList() {
+        db.collection("product").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = new Product();
+                        product.setId(document.getId());
+                        product.setDescription((String) document.get("description"));
+                        product.setName((String) document.get("name"));
+                        product.setPrice(document.getDouble("price"));
+                        product.setDiscount(document.getDouble("discount"));
+                        product.setImage((String) document.get("image"));
+                        product.setCategory((String) document.get("categoryId"));
+                        favoriteProductList.add(product);
+                    }
+                    Collections.shuffle(favoriteProductList);
+                    homeFragmentListFavoriteAdapter.notifyDataSetChanged();
+                } else {
+                }
+            }
+        });
+    }
+
     @Override
-    public void onCLick() {
+    public void onCLick(String productId) {
         HomeProductDetailFragment homeProductDetailFragment = new HomeProductDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("productId", productId);
+        homeProductDetailFragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
                 .replace(R.id.framelayout, homeProductDetailFragment)
                 .addToBackStack("homeProductDetailFragment").commit();
     }
 
-//    private  class LoadData extends AsyncTask<Void, Void, List<Category>> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected List<Category> doInBackground(Void... voids) {
-//            Log.d("Aize","123");
-//            return getCategoryList();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(List<Category> list) {
-//            super.onPostExecute(list);
-//            categoryList = list;
-//            homeFragmentListCategoryAdapter.notifyDataSetChanged();
-//        }
-//    }
+
 }

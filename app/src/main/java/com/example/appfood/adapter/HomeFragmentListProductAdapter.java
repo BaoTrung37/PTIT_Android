@@ -1,5 +1,7 @@
 package com.example.appfood.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
+import com.example.appfood.fragment.HomeProductDetailFragment;
 import com.example.appfood.model.Product;
 import com.example.appfood.presenter.FragmentHomePresenter;
 import com.squareup.picasso.Picasso;
@@ -20,9 +23,11 @@ import java.util.List;
 public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFragmentListProductAdapter.ViewHolder>{
     List<Product> list;
     FragmentHomePresenter fragmentHomePresenter;
+    Context context;
 
-    public HomeFragmentListProductAdapter(List<Product> list) {
+    public HomeFragmentListProductAdapter(List<Product> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     public void setFragmentHomePresenter(FragmentHomePresenter fragmentHomePresenter) {
@@ -42,9 +47,17 @@ public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFra
         if(product == null){
             return;
         }
-        holder.title.setText(product.getTitle());
+        holder.title.setText(product.getName());
         Picasso.get().load(product.getImage()).into(holder.anh);
         holder.rate.setText("5.0");
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, HomeProductDetailFragment.class);
+//                intent.putExtra("product",product);
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
