@@ -1,5 +1,6 @@
 package com.example.appfood.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +18,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.adapter.CartShoppingCartListAdapter;
+import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentCartShoppingCartListener;
 import com.example.appfood.model.Product;
 import com.example.appfood.model.ProductItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartShoppingCartFragment extends Fragment implements View.OnClickListener, IFragmentCartShoppingCartListener{
+public class CartShoppingCartFragment extends Fragment implements View.OnClickListener, IFragmentCartShoppingCartListener {
 
     RecyclerView recyclerShoppingCartList;
     CheckBox cbCheckAll;
@@ -33,6 +42,9 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
 
     CartShoppingCartListAdapter cartShoppingCartListAdapter;
     List<ProductItem> cartProductList;
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Nullable
     @Override
@@ -45,14 +57,16 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getData();
         initData(view);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     private void initData(View view) {
-        //
-        cartProductList = new ArrayList<>();
-        //
-        fakeData();
         //find by id
         recyclerShoppingCartList = view.findViewById(R.id.recycler_shopping_cart_list);
         cbCheckAll = view.findViewById(R.id.cb_checkall);
@@ -62,13 +76,17 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         cartShoppingCartListAdapter = new CartShoppingCartListAdapter(cartProductList);
         cartShoppingCartListAdapter.setIFragmentCartShoppingCartListener(this);
         RecyclerView.LayoutManager cartShoppingCartListLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        recyclerShoppingCartList.setAdapter(cartShoppingCartListAdapter);
         recyclerShoppingCartList.setLayoutManager(cartShoppingCartListLayoutManager);
+        recyclerShoppingCartList.setAdapter(cartShoppingCartListAdapter);
 
         // set event
         btnOrder.setOnClickListener(this);
         checkAll();
         //
+        setTotalPrice();
+    }
+
+    private void setTotalPrice() {
         tvTotalPrice.setText(cartShoppingCartListAdapter.getTotalPrice() + " đ");
     }
 
@@ -98,14 +116,58 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    private void fakeData() {
-        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
-        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
-        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
+    private void getShoppingCart() {
+        ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setCancelable(false);
+        progress.show();
 
+        db.collection("cart")
+                .document(user.getUid())
+                .collection("product")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<ProductItem> productItems = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ProductItem productItem = new ProductItem();
+                                Product product = Database.getProduct(document.getId());
+                                int quantity = Integer.parseInt(document.getLong("quantity").toString());
+                                productItem.setProduct(product);
+                                productItem.setQuantity(quantity);
+                                cartProductList.add(productItem);
+                                cartShoppingCartListAdapter.setList(cartProductList);
+                            }
+                            setTotalPrice();
+                            progress.dismiss();
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cartShoppingCartListAdapter.setList(cartProductList);
+    }
+
+    private void getData() {
+        //
+        cartProductList = new ArrayList<>();
+
+        //
+        getShoppingCart();
+
+//        cartProductList.add(new ProductItem("1", new Product("1", "Ga chien xao sa ơt",
+//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
+//        cartProductList.add(new ProductItem("1", new Product("1", "Ga chien xao sa ơt",
+//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
+//        cartProductList.add(new ProductItem("1", new Product("1", "Ga chien xao sa ơt",
+//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
     }
 
 

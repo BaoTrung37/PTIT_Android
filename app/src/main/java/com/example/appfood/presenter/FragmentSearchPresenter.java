@@ -9,6 +9,9 @@ public class FragmentSearchPresenter {
         this.iOnClickItem = iOnClickItem;
     }
     public void onCLickCategory(String categoryId){
-        iOnClickItem.onClick(categoryId);
+        iOnClickItem.onClickCategory(categoryId);
+    }
+    public void onClickProduct(String productId) {
+        iOnClickItem.onClickProduct(productId);
     }
 }

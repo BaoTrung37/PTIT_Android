@@ -1,5 +1,6 @@
 package com.example.appfood.interfaces;
 
 public interface IOnClickItem {
-    void onClick(String id);
+    void onClickCategory(String id);
+    void onClickProduct(String id);
 }

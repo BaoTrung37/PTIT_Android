@@ -167,7 +167,23 @@ public class SearchProductFragment extends Fragment implements IOnClickItem {
     }
 
     @Override
-    public void onClick(String id) {
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onClickCategory(String id) {
         getProductWithId(id);
+    }
+
+    @Override
+    public void onClickProduct(String id) {
+        HomeProductDetailFragment homeProductDetailFragment = new HomeProductDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("productId", id);
+        homeProductDetailFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.framelayout, homeProductDetailFragment)
+                .addToBackStack("homeProductDetailFragment").commit();
     }
 }

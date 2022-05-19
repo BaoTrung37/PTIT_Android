@@ -23,6 +23,7 @@ import com.example.appfood.adapter.HomeFragmentListCategoryAdapter;
 import com.example.appfood.adapter.HomeFragmentListFavoriteAdapter;
 import com.example.appfood.adapter.HomeFragmentListFlashSaleAdapter;
 import com.example.appfood.adapter.HomeFragmentListProductAdapter;
+import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentHomeListener;
 import com.example.appfood.model.Category;
 import com.example.appfood.model.Product;
@@ -137,6 +138,8 @@ public class HomeFragment extends Fragment implements IFragmentHomeListener {
     }
 
     private void fakeData() {
+        Database.productList = Database.getProductList();
+        Database.categoryList = Database.getCategoryList();
         //
         categoryList = new ArrayList<>();
         flashsaleProductList = new ArrayList<>();

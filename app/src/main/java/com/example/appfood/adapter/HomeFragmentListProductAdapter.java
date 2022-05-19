@@ -1,7 +1,6 @@
 package com.example.appfood.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
-import com.example.appfood.fragment.HomeProductDetailFragment;
 import com.example.appfood.model.Product;
 import com.example.appfood.presenter.FragmentHomePresenter;
 import com.squareup.picasso.Picasso;

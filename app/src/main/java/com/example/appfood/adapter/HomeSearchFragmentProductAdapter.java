@@ -79,7 +79,7 @@ public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeS
 
         @Override
         public void onClick(View view) {
-
+            fragmentSearchPresenter.onClickProduct(list.get(getAdapterPosition()).getId());
         }
     }
 }

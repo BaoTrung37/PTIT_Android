@@ -17,6 +17,7 @@ import com.example.appfood.R;
 import com.example.appfood.interfaces.IFragmentCartShoppingCartListener;
 import com.example.appfood.model.Product;
 import com.example.appfood.model.ProductItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -28,6 +29,11 @@ public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppi
 
     public void setIFragmentCartShoppingCartListener(IFragmentCartShoppingCartListener iFragmentCartShoppingCartListener) {
         this.iFragmentCartShoppingCartListener = iFragmentCartShoppingCartListener;
+    }
+
+    public void setList(List<ProductItem> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     public CartShoppingCartListAdapter(List<ProductItem> list) {
@@ -69,14 +75,17 @@ public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_cart_shopping_cart_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_fragment_cart_shopping_cart_list,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //
+
         ProductItem productItem = list.get(position);
+        Picasso.get().load(productItem.getProduct().getImage()).into(holder.image);
+        holder.title.setText(productItem.getProduct().getName());
         holder.check.setChecked(productItem.isCheck());
         holder.quantity.setText(productItem.getQuantity() +"");
         double totalPrice = (productItem.getProduct().getPrice() * (100 - productItem.getProduct().getDiscount()) / 100) * productItem.getQuantity();
