@@ -3,6 +3,8 @@ package com.example.appfood.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +19,12 @@ import com.example.appfood.presenter.FragmentSearchPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
-public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeSearchFragmentProductAdapter.ViewHolder> {
+public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeSearchFragmentProductAdapter.ViewHolder> implements Filterable {
     List<Product> list;
+    List<Product> listOld;
     FragmentSearchPresenter fragmentSearchPresenter;
 
     public HomeSearchFragmentProductAdapter(List<Product> list) {
@@ -29,6 +33,7 @@ public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeS
 
     public void setList(List<Product> list) {
         this.list = list;
+        listOld = list;
         notifyDataSetChanged();
     }
 
@@ -62,6 +67,8 @@ public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeS
         return list.size();
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView anh;
         TextView title,rate,price;
@@ -81,5 +88,35 @@ public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeS
         public void onClick(View view) {
             fragmentSearchPresenter.onClickProduct(list.get(getAdapterPosition()).getId());
         }
+    }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if(strSearch.isEmpty()){
+                    list  = listOld;
+                }
+                else{
+                    List<Product> newList = new ArrayList<>();
+                    for(Product product : listOld){
+                        if(product.getName().toLowerCase().contains(strSearch.toLowerCase())){
+                            newList.add(product);
+                        }
+                    }
+                    list = newList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = list;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list = (List<Product>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }

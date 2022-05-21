@@ -18,7 +18,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Database {
 
@@ -26,6 +28,7 @@ public class Database {
     static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     public static List<Product> productList = new ArrayList<>();
     public static List<Category> categoryList = new ArrayList<>();
+    public static List<ProductItem> shoppingCartList = new ArrayList<>();
 
     public static List<Product> getProductList(){
         List<Product> productList = new ArrayList<>();
@@ -153,5 +156,10 @@ public class Database {
                     }
                 });
         return productItems;
+    }
+    public static void addProduct(String productId, int quantity){
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("quantity",quantity);
+        db.collection("cart").document(user.getUid()).collection("product").document(productId).set(docData);
     }
 }

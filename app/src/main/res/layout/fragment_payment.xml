@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="100.000.000 đ"
+                        android:text="0đ"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="-100.000 đ"
+                        android:text="0đ"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
                 </RelativeLayout>
@@ -138,7 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="-30.000 đ"
+                        android:text="30.000 đ"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
                 </RelativeLayout>
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="100.030.000 đ"
+                        android:text="0đ"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
                 </RelativeLayout>

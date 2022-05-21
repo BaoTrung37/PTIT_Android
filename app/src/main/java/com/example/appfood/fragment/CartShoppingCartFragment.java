@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +73,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         cbCheckAll = view.findViewById(R.id.cb_checkall);
         btnOrder = view.findViewById(R.id.btn_order);
         tvTotalPrice = view.findViewById(R.id.tv_total_price);
+        btnOrder.setVisibility(View.GONE);
         // adapter
         cartShoppingCartListAdapter = new CartShoppingCartListAdapter(cartProductList);
         cartShoppingCartListAdapter.setIFragmentCartShoppingCartListener(this);
@@ -82,8 +84,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         // set event
         btnOrder.setOnClickListener(this);
         checkAll();
-        //
-        setTotalPrice();
+//        setTotalPrice();
     }
 
     private void setTotalPrice() {
@@ -107,7 +108,10 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         switch (view.getId()){
             case R.id.btn_order:
                 PaymentFragment paymentFragment = new PaymentFragment();
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cart", (Serializable) cartShoppingCartListAdapter.getProductItemChecked());
+                bundle.putDouble("totalPrice",cartShoppingCartListAdapter.getTotalPrice());
+                paymentFragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.framelayout, paymentFragment)
                         .addToBackStack("paymentFragment").commit();
@@ -131,7 +135,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<ProductItem> productItems = new ArrayList<>();
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 ProductItem productItem = new ProductItem();
                                 Product product = Database.getProduct(document.getId());
@@ -156,18 +160,9 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     }
 
     private void getData() {
-        //
         cartProductList = new ArrayList<>();
-
-        //
         getShoppingCart();
 
-//        cartProductList.add(new ProductItem("1", new Product("1", "Ga chien xao sa ơt",
-//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
-//        cartProductList.add(new ProductItem("1", new Product("1", "Ga chien xao sa ơt",
-//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
-//        cartProductList.add(new ProductItem("1", new Product("1", "Ga chien xao sa ơt",
-//                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
     }
 
 
@@ -179,6 +174,8 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     @Override
     public void setTotalPrice(double totalPrice) {
         tvTotalPrice.setText(totalPrice + " đ");
+        btnOrder.setVisibility(totalPrice != 0 ? View.VISIBLE: View.GONE);
+
     }
 
 }

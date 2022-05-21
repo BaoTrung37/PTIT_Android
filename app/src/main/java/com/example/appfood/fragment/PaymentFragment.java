@@ -19,12 +19,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.appfood.R;
 import com.example.appfood.interfaces.IFragmentPaymentListener;
+import com.example.appfood.model.ProductItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentFragment extends Fragment implements View.OnClickListener, IFragmentPaymentListener {
     
-    TextView tvAddAddress,tvAddress;
+    TextView tvAddAddress,tvAddress,tvTotalPrice,tvTotalPayment;
     Button btConfirm;
 
+    List<ProductItem> productItemList = new ArrayList<>();
+    double totalPrice = 0;
+    double totalPayment = 0;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +47,22 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getData();
         initData(view);
+        setData();
         setToolBar(view);
+    }
+
+    private void setData() {
+        tvTotalPrice.setText(totalPrice + " đ");
+        tvTotalPayment.setText(totalPayment + " đ");
+    }
+
+    private void getData() {
+        productItemList = (List<ProductItem>) getArguments().getSerializable("cart");
+        totalPrice = getArguments().getDouble("totalPrice");
+
+        totalPayment = totalPrice;
     }
 
     private void setToolBar(View view) {
@@ -59,6 +80,8 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, I
         tvAddAddress = view.findViewById(R.id.tv_add_address);
         tvAddress = view.findViewById(R.id.tv_address);
         btConfirm = view.findViewById(R.id.bt_confirm);
+        tvTotalPrice = view.findViewById(R.id.tv_total_price);
+        tvTotalPayment = view.findViewById(R.id.tv_total_payment);
 
         // event
         tvAddAddress.setOnClickListener(this);

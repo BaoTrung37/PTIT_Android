@@ -1,6 +1,8 @@
 package com.example.appfood.fragment;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +63,7 @@ public class SearchProductFragment extends Fragment implements IOnClickItem {
         initId(view);
         setData();
         initData();
+        searchView();
     }
 
     private void setToolBar(View view) {
@@ -164,6 +167,27 @@ public class SearchProductFragment extends Fragment implements IOnClickItem {
 
         homeSearchFragmentProductAdapter = new HomeSearchFragmentProductAdapter(productList);
         homeSearchFragmentProductAdapter.setFragmentSearchPresenter(fragmentSearchPresenter);
+    }
+
+    private void searchView() {
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService (Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                homeSearchFragmentProductAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                homeSearchFragmentProductAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
     }
 
     @Override
