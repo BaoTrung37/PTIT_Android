@@ -1,11 +1,15 @@
 package com.example.appfood.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,10 +18,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.example.appfood.R;
+import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentUpdateInformationListener;
+import com.example.appfood.presenter.UpdateInformationPresenter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class UpdateInformationFragment extends Fragment implements View.OnClickListener , IFragmentUpdateInformationListener {
+    UpdateInformationPresenter updateInformationPresenter;
+
     LinearLayout linearName, linearSex, linearEmail, linearPhone, linearDateOfBirth, linearChangePassword;
+    TextView tvUsername,tvSave;
+    String username, gender, email, dateOfBirth, password;
 
     @Nullable
     @Override
@@ -31,6 +44,12 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
         initData(view);
         setToolBar(view);
+        setData();
+    }
+
+    private void setData() {
+        username = Database.user.getDisplayName().isEmpty() ? "User124124": Database.user.getDisplayName();
+        tvUsername.setText(username);
     }
 
     private void initData(View view) {
@@ -41,6 +60,11 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
         linearEmail = view.findViewById(R.id.linear_email);
         linearChangePassword = view.findViewById(R.id.linear_change_password);
         linearDateOfBirth = view.findViewById(R.id.linear_date_of_birth);
+        tvUsername = view.findViewById(R.id.tv_username);
+        tvSave = view.findViewById(R.id.tv_save);
+        updateInformationPresenter = new UpdateInformationPresenter();
+        updateInformationPresenter.setListener(this);
+
         // set event
         linearName.setOnClickListener(this);
         linearPhone.setOnClickListener(this);
@@ -48,6 +72,7 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
         linearEmail.setOnClickListener(this);
         linearChangePassword.setOnClickListener(this);
         linearDateOfBirth.setOnClickListener(this);
+        tvSave.setOnClickListener(this);
         //
 
     }
@@ -68,8 +93,9 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
         switch (view.getId()) {
             case R.id.linear_name:
                 UpdateNameFragment updateNameFragment = new UpdateNameFragment();
+                updateNameFragment.setUpdateInformationPresenter(updateInformationPresenter);
                 getParentFragmentManager().beginTransaction()
-                        .replace(R.id.framelayout,updateNameFragment)
+                        .add(R.id.framelayout,updateNameFragment)
                         .addToBackStack("updateNameFragment").commit();
                 break;
             case R.id.linear_phone:
@@ -101,7 +127,38 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
                         .replace(R.id.framelayout,updateDateOfBirthFragment)
                         .addToBackStack("updateDateOfBirthFragment").commit();
                 break;
+            case R.id.tv_save:
+                updateProfile();
+                break;
         }
+    }
+
+    private void updateProfile() {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(username)
+                .build();
+        Database.user
+                .updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            builder.setTitle("Thông báo cập nhật");
+                            builder.setMessage("Cập nhật thành công");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    getParentFragmentManager().popBackStack();
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+                        }
+                    }
+                });
+
     }
 
     @Override
@@ -111,11 +168,12 @@ public class UpdateInformationFragment extends Fragment implements View.OnClickL
 
     @Override
     public void setName(String name) {
-
+        username = name;
+        tvUsername.setText(username);
     }
 
     @Override
-    public void setSex() {
+    public void setGender(int pos) {
 
     }
 

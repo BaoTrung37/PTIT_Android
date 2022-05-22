@@ -1,5 +1,6 @@
 package com.example.appfood.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,17 @@ import com.example.appfood.model.Product;
 import com.example.appfood.presenter.FragmentHomePresenter;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFragmentListProductAdapter.ViewHolder>{
     List<Product> list;
     FragmentHomePresenter fragmentHomePresenter;
+    Context context;
 
-    public HomeFragmentListProductAdapter(List<Product> list) {
+    public HomeFragmentListProductAdapter(List<Product> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     public void setFragmentHomePresenter(FragmentHomePresenter fragmentHomePresenter) {
@@ -42,9 +46,21 @@ public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFra
         if(product == null){
             return;
         }
-        holder.title.setText(product.getTitle());
+        holder.title.setText(product.getName());
+        DecimalFormat dfVND = new DecimalFormat("###,###,###,###");
+        holder.price.setText(dfVND.format(product.getPrice() * (1 - (product.getDiscount() / 100))) + " đ");
         Picasso.get().load(product.getImage()).into(holder.anh);
+
         holder.rate.setText("5.0");
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, HomeProductDetailFragment.class);
+//                intent.putExtra("product",product);
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -55,13 +71,14 @@ public class HomeFragmentListProductAdapter extends RecyclerView.Adapter<HomeFra
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView anh;
-        TextView title,rate;
+        TextView title,rate,price;
         CardView item;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             item = itemView.findViewById(R.id.item);
             anh = itemView.findViewById(R.id.item_image);
+            price = itemView.findViewById(R.id.item_price);
             title = itemView.findViewById(R.id.item_title);
             rate = itemView.findViewById(R.id.item_rate);
             item.setOnClickListener(this);

@@ -37,7 +37,7 @@ public class ReviewFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initData(view);
-        onBack();
+        setToolBar(view);
     }
 
     private void initData(View view) {
@@ -59,11 +59,13 @@ public class ReviewFragment extends Fragment{
         recyclerReviewList.setLayoutManager(reviewListLayoutManager);
     }
 
-    private void onBack() {
+    private void setToolBar(View view) {
+        Toolbar toolbar = view.findViewById(R.id.toolBar);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Implement back screen
+                getParentFragmentManager().popBackStack();
             }
         });
     }

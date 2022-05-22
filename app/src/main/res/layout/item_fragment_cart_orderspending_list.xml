@@ -4,6 +4,7 @@
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardElevation="5dp"
     app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/item_tv_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="315652325654"
@@ -47,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_ma" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/item_tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -97,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="32,002 đ"
+            android:text="30,000 đ"
             android:textColor="@color/black"
             android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +106,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_Tongtien" />
 
         <TextView
-            android:id="@+id/item_tv_price"
+            android:id="@+id/item_tv_totalPayment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="32,002 đ"
@@ -161,7 +162,7 @@
 
         <TextView
 
-            android:id="@+id/item_tv_timePost"
+            android:id="@+id/item_tv_timeCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="24-04-2022 15:30:11"
@@ -195,4 +196,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
 </androidx.cardview.widget.CardView>

@@ -10,7 +10,7 @@
         app:showAsAction="withText"
         android:id="@+id/cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="Giỏi hàng" />
+        android:title="Giỏ hàng" />
     <item
         app:showAsAction="withText"
         android:id="@+id/notification"

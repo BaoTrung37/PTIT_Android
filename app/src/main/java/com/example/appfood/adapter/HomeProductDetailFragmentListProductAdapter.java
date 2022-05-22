@@ -12,15 +12,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.model.Product;
+import com.example.appfood.presenter.FragmentProductDetailPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeProductDetailFragmentListProductAdapter extends RecyclerView.Adapter<HomeProductDetailFragmentListProductAdapter.ViewHolder> {
     List<Product> list;
+    FragmentProductDetailPresenter fragmentProductDetailPresenter;
 
     public HomeProductDetailFragmentListProductAdapter(List<Product> list) {
         this.list = list;
+    }
+
+    public void setFragmentProductDetailPresenter(FragmentProductDetailPresenter fragmentProductDetailPresenter) {
+        this.fragmentProductDetailPresenter = fragmentProductDetailPresenter;
+    }
+
+    public void setList(List<Product> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -37,7 +49,7 @@ public class HomeProductDetailFragmentListProductAdapter extends RecyclerView.Ad
         if (product == null) {
             return;
         }
-        holder.title.setText(product.getTitle());
+        holder.title.setText(product.getName());
         Picasso.get().load(product.getImage()).into(holder.anh);
         holder.rate.setText("5.0");
     }
@@ -47,7 +59,7 @@ public class HomeProductDetailFragmentListProductAdapter extends RecyclerView.Ad
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView anh;
         TextView title, rate;
         CardView item;
@@ -58,12 +70,12 @@ public class HomeProductDetailFragmentListProductAdapter extends RecyclerView.Ad
             anh = itemView.findViewById(R.id.item_image);
             title = itemView.findViewById(R.id.item_title);
             rate = itemView.findViewById(R.id.item_rate);
-            item.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fragmentProductDetailPresenter.onClickProduct(list.get(getAdapterPosition()));
+                }
+            });
         }
     }
 }

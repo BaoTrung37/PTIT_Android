@@ -14,11 +14,16 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
+import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentCartShoppingCartListener;
 import com.example.appfood.model.Product;
 import com.example.appfood.model.ProductItem;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // TODO: Implement CartShoppingCart
 public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppingCartListAdapter.ViewHolder> {
@@ -28,6 +33,11 @@ public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppi
 
     public void setIFragmentCartShoppingCartListener(IFragmentCartShoppingCartListener iFragmentCartShoppingCartListener) {
         this.iFragmentCartShoppingCartListener = iFragmentCartShoppingCartListener;
+    }
+
+    public void setList(List<ProductItem> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     public CartShoppingCartListAdapter(List<ProductItem> list) {
@@ -49,6 +59,15 @@ public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppi
         }
         return true;
     }
+    public List<ProductItem> getProductItemChecked(){
+        List<ProductItem> productItemList = new ArrayList<>();
+        for(ProductItem productItem: list){
+            if(productItem.isCheck()){
+                productItemList.add(productItem);
+            }
+        }
+        return productItemList;
+    }
     public double getTotalPrice(){
         double totalPrice = 0;
         for(ProductItem productItem: list){
@@ -63,20 +82,24 @@ public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppi
         productItem.setQuantity(quantity);
         list.remove(position);
         list.add(position,productItem);
+        Database.addProduct(productItem.getProduct().getId(),quantity);
         iFragmentCartShoppingCartListener.setTotalPrice(getTotalPrice());
 
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_cart_shopping_cart_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_fragment_cart_shopping_cart_list,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //
+
         ProductItem productItem = list.get(position);
+        Picasso.get().load(productItem.getProduct().getImage()).into(holder.image);
+        holder.title.setText(productItem.getProduct().getName());
         holder.check.setChecked(productItem.isCheck());
         holder.quantity.setText(productItem.getQuantity() +"");
         double totalPrice = (productItem.getProduct().getPrice() * (100 - productItem.getProduct().getDiscount()) / 100) * productItem.getQuantity();

@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
@@ -96,12 +97,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void moveToSignUp() {
-        // Is login
-
-        // Sign Up
         Intent intent = new Intent(SignInActivity.this,SignUpActivity.class);
         startActivity(intent);
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

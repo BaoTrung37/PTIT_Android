@@ -37,12 +37,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_name"
+                        android:id="@+id/tv_username"
                         style="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:text="Nguyễn Bảo Trung"
+                        android:text="User18472839"
                         android:textColor="@color/black" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -309,6 +309,28 @@
                 android:src="@drawable/img_ic_right_arrow"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
+        </LinearLayout>
+        <View
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:id="@+id/linear_more_logout"
+            android:padding="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" >
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                android:text="Đăng xuất"
+
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
         </LinearLayout>
         <View
             android:background="@color/black"

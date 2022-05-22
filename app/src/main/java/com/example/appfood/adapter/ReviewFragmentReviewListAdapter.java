@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.model.Review;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

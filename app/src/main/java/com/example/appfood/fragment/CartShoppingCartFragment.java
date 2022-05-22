@@ -1,6 +1,8 @@
 package com.example.appfood.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +19,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.adapter.CartShoppingCartListAdapter;
+import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentCartShoppingCartListener;
 import com.example.appfood.model.Product;
 import com.example.appfood.model.ProductItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class CartShoppingCartFragment extends Fragment implements View.OnClickListener, IFragmentCartShoppingCartListener{
+public class CartShoppingCartFragment extends Fragment implements View.OnClickListener, IFragmentCartShoppingCartListener {
 
     RecyclerView recyclerShoppingCartList;
     CheckBox cbCheckAll;
@@ -34,41 +48,49 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     CartShoppingCartListAdapter cartShoppingCartListAdapter;
     List<ProductItem> cartProductList;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart_shopping_cart, container, false);
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getData();
         initData(view);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     private void initData(View view) {
-        //
-        cartProductList = new ArrayList<>();
-        //
-        fakeData();
         //find by id
         recyclerShoppingCartList = view.findViewById(R.id.recycler_shopping_cart_list);
         cbCheckAll = view.findViewById(R.id.cb_checkall);
         btnOrder = view.findViewById(R.id.btn_order);
         tvTotalPrice = view.findViewById(R.id.tv_total_price);
+        btnOrder.setVisibility(View.GONE);
         // adapter
         cartShoppingCartListAdapter = new CartShoppingCartListAdapter(cartProductList);
         cartShoppingCartListAdapter.setIFragmentCartShoppingCartListener(this);
         RecyclerView.LayoutManager cartShoppingCartListLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        recyclerShoppingCartList.setAdapter(cartShoppingCartListAdapter);
         recyclerShoppingCartList.setLayoutManager(cartShoppingCartListLayoutManager);
+        recyclerShoppingCartList.setAdapter(cartShoppingCartListAdapter);
 
         // set event
         btnOrder.setOnClickListener(this);
         checkAll();
-        //
+//        setTotalPrice();
+    }
+
+    private void setTotalPrice() {
         tvTotalPrice.setText(cartShoppingCartListAdapter.getTotalPrice() + " đ");
     }
 
@@ -89,7 +111,10 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         switch (view.getId()){
             case R.id.btn_order:
                 PaymentFragment paymentFragment = new PaymentFragment();
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("cart", (Serializable) cartShoppingCartListAdapter.getProductItemChecked());
+                bundle.putDouble("totalPrice",cartShoppingCartListAdapter.getTotalPrice());
+                paymentFragment.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.framelayout, paymentFragment)
                         .addToBackStack("paymentFragment").commit();
@@ -98,14 +123,74 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    private void fakeData() {
-        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
-        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
-        cartProductList.add(new ProductItem(new Product("1", "Ga chien xao sa ơt",
-                402223, "https://cdn-icons-png.flaticon.com/512/7088/7088397.png", "", 10, "asdasda"), 1));
+    private void getShoppingCart() {
+        ProgressDialog progress = new ProgressDialog(getContext());
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setCancelable(false);
+        progress.show();
 
+        db.collection("cart")
+                .document(user.getUid())
+                .collection("product")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ProductItem productItem = new ProductItem();
+                                Product product = Database.getProduct(document.getId());
+                                int quantity = Integer.parseInt(document.getLong("quantity").toString());
+                                productItem.setProduct(product);
+                                productItem.setQuantity(quantity);
+                                cartProductList.add(productItem);
+                                cartShoppingCartListAdapter.setList(cartProductList);
+                            }
+                            Database.shoppingCartList = cartProductList;
+                            setTotalPrice();
+                            progress.dismiss();
+                        }
+                    }
+                });
+
+    }
+
+//    private void getShoppingCart2() {
+//        ProgressDialog progress = new ProgressDialog(getContext());
+//        progress.setTitle("Loading");
+//        progress.setMessage("Wait while loading...");
+//        progress.setCancelable(false);
+//        progress.show();
+//
+//        db.collection("cart")
+//                .document(user.getUid())
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            Log.d("aaa",task.getResult().get("shoppingCart").toString());
+//                            Map<String,Object> productItems = task.getResult().getData();
+//                            Log.d("bbb", productItems.get("check").toString());
+//                        }
+//                        progress.dismiss();
+//                    }
+//                });
+//
+//    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cartShoppingCartListAdapter.setList(cartProductList);
+    }
+
+    private void getData() {
+        cartProductList = new ArrayList<>();
+        getShoppingCart();
     }
 
 
@@ -117,6 +202,8 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     @Override
     public void setTotalPrice(double totalPrice) {
         tvTotalPrice.setText(totalPrice + " đ");
+        btnOrder.setVisibility(totalPrice != 0 ? View.VISIBLE: View.GONE);
+
     }
 
 }

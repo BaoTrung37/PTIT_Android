@@ -1,22 +1,31 @@
 package com.example.appfood.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.appfood.MainActivity;
 import com.example.appfood.R;
+import com.example.appfood.SignInActivity;
+import com.example.appfood.database.Database;
+import com.google.firebase.auth.FirebaseAuth;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment implements View.OnClickListener {
     CircleImageView circleInformation;
+    LinearLayout tvLogout;
+    TextView tvUsername;
 
+    String username;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,13 +37,22 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initData(view);
+        setData();
+    }
+
+    private void setData() {
+        username = Database.user.getDisplayName().isEmpty() ? "User124124": Database.user.getDisplayName();
+        tvUsername.setText(username);
     }
 
     private void initData(View view) {
         // find by id
         circleInformation = view.findViewById(R.id.circle_information);
+        tvLogout = view.findViewById(R.id.linear_more_logout);
+        tvUsername = view.findViewById(R.id.tv_username);
         // set event
         circleInformation.setOnClickListener(this);
+        tvLogout.setOnClickListener(this);
     }
 
     @Override
@@ -44,6 +62,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
                 UpdateInformationFragment updateInformationFragment = new UpdateInformationFragment();
                 getParentFragmentManager().beginTransaction().replace(R.id.framelayout, updateInformationFragment)
                         .addToBackStack("updateInformationFragment").commit();
+                break;
+            case R.id.linear_more_logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), SignInActivity.class);
+                startActivity(intent);
                 break;
         }
     }
