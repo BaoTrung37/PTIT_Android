@@ -157,31 +157,6 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
 
     }
 
-//    private void getShoppingCart2() {
-//        ProgressDialog progress = new ProgressDialog(getContext());
-//        progress.setTitle("Loading");
-//        progress.setMessage("Wait while loading...");
-//        progress.setCancelable(false);
-//        progress.show();
-//
-//        db.collection("cart")
-//                .document(user.getUid())
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            Log.d("aaa",task.getResult().get("shoppingCart").toString());
-//                            Map<String,Object> productItems = task.getResult().getData();
-//                            Log.d("bbb", productItems.get("check").toString());
-//                        }
-//                        progress.dismiss();
-//                    }
-//                });
-//
-//    }
-
-
     @Override
     public void onResume() {
         super.onResume();

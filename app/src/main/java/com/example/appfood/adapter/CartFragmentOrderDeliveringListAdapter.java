@@ -80,6 +80,7 @@ public class CartFragmentOrderDeliveringListAdapter extends RecyclerView.Adapter
             item = itemView.findViewById(R.id.item);
 
             item.setOnClickListener(this);
+            btConfirm.setOnClickListener(this);
         }
 
         @Override
@@ -87,6 +88,9 @@ public class CartFragmentOrderDeliveringListAdapter extends RecyclerView.Adapter
             switch (view.getId()){
                 case R.id.item:
                     cartFragmentOrderPresenter.onClickOrder(orderList.get(getAdapterPosition()));
+                    break;
+                    case R.id.item_bt_confirm:
+                    cartFragmentOrderPresenter.onClickCompleted( orderList.get(getAdapterPosition()).getId());
                     break;
 
             }

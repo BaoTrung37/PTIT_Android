@@ -4,6 +4,7 @@ import static com.example.appfood.database.Database.db;
 import static com.example.appfood.database.Database.user;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,11 @@ public class CartOrdersDeliveringFragment extends Fragment implements IOrderDeta
         initData();
         initId(view);
         setData();
+        setListener();
+    }
+
+    private void setListener() {
+
     }
 
     private void setData() {
@@ -120,5 +126,21 @@ public class CartOrdersDeliveringFragment extends Fragment implements IOrderDeta
     @Override
     public void onClick(Order order) {
 
+    }
+
+    @Override
+    public void onChangeStatus(String id, int status) {
+        Log.d("id",id);
+        db.collection("user")
+                .document(user.getUid())
+                .collection("order")
+                .document(id)
+                .update("orderStatus",status)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        initData();
+                    }
+                });
     }
 }

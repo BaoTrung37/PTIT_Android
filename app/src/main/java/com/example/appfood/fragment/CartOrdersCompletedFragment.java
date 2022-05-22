@@ -51,7 +51,13 @@ public class CartOrdersCompletedFragment extends Fragment implements IOrderDetai
         initData();
         initId(view);
         setData();
+        setListener();
     }
+
+    private void setListener() {
+
+    }
+
     private void setData() {
         cartFragmentOrderCompletedListAdapter = new CartFragmentOrderCompletedListAdapter(orderList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
@@ -118,6 +124,11 @@ public class CartOrdersCompletedFragment extends Fragment implements IOrderDetai
 
     @Override
     public void onClick(Order order) {
+
+    }
+
+    @Override
+    public void onChangeStatus(String id, int status) {
 
     }
 }

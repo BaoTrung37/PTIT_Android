@@ -80,6 +80,7 @@ public class CartFragmentOrderPendingListAdapter extends RecyclerView.Adapter<Ca
             item = itemView.findViewById(R.id.item);
 
             item.setOnClickListener(this);
+            btCancel.setOnClickListener(this);
         }
 
         @Override
@@ -88,7 +89,9 @@ public class CartFragmentOrderPendingListAdapter extends RecyclerView.Adapter<Ca
                 case R.id.item:
                     cartFragmentOrderPresenter.onClickOrder(orderList.get(getAdapterPosition()));
                     break;
-
+                case R.id.item_bt_cancel:
+                    cartFragmentOrderPresenter.onClickCanceled(orderList.get(getAdapterPosition()).getId());
+                    break;
             }
         }
     }

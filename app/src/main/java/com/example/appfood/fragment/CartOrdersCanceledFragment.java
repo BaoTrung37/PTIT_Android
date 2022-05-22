@@ -119,4 +119,9 @@ public class CartOrdersCanceledFragment extends Fragment implements IOrderDetail
     public void onClick(Order order) {
 
     }
+
+    @Override
+    public void onChangeStatus(String id, int status) {
+
+    }
 }

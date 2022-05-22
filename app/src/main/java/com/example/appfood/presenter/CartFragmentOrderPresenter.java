@@ -12,4 +12,11 @@ public class CartFragmentOrderPresenter {
     public void onClickOrder(Order order){
         iOrderDetailListener.onClick(order);
     }
+
+    public void onClickCanceled(String id){
+        iOrderDetailListener.onChangeStatus(id,3);
+    }
+    public void onClickCompleted(String id){
+        iOrderDetailListener.onChangeStatus(id,2);
+    }
 }
