@@ -33,7 +33,7 @@ public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeS
 
     public void setList(List<Product> list) {
         this.list = list;
-        listOld = list;
+        this.listOld = list;
         notifyDataSetChanged();
     }
 
@@ -64,7 +64,7 @@ public class HomeSearchFragmentProductAdapter extends RecyclerView.Adapter<HomeS
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return (list == null) ? 0: list.size();
     }
 
 

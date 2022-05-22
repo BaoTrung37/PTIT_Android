@@ -62,7 +62,7 @@ public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppi
     public List<ProductItem> getProductItemChecked(){
         List<ProductItem> productItemList = new ArrayList<>();
         for(ProductItem productItem: list){
-            if(!productItem.isCheck()){
+            if(productItem.isCheck()){
                 productItemList.add(productItem);
             }
         }

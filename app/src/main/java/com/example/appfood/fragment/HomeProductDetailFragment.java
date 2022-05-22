@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
 import com.example.appfood.adapter.HomeProductDetailFragmentListProductAdapter;
+import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentProductDetailListener;
 import com.example.appfood.model.Product;
 import com.example.appfood.model.ProductItem;
@@ -69,7 +70,6 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initData(view);
-//        fakeData();
         onBack(view);
     }
 
@@ -147,13 +147,6 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
         });
     }
 
-
-    
-
-    private void fakeData() {
-        // Get data from FIREBASE
-        initProductRelativeList();
-    }
     private void initProductRelativeList() {
         List<Product> products = new ArrayList<>();
         Log.d("categoryID",productCurrent.getCategory());
@@ -184,10 +177,13 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
     }
 
     private void addToCart(String productId, int quantity){
-
         Map<String, Object> docData = new HashMap<>();
         docData.put("quantity",quantity);
-            db.collection("cart").document(user.getUid()).collection("product").document(productId).set(docData)
+            db.collection("cart")
+                    .document(user.getUid())
+                    .collection("product")
+                    .document(productId)
+                    .set(docData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -203,13 +199,36 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
                 });
     }
 
+//    private void addToCartv2(Product product, int quantity){
+//        ProductItem productItem = new ProductItem();
+//        productItem.setProduct(product);
+//        productItem.setQuantity(quantity);
+//        Database.shoppingCartList.add(productItem);
+//        Map<String, Object> docData = new HashMap<>();
+//        docData.put("shoppingCart",Database.shoppingCartList);
+//        db.collection("cart").document(user.getUid()).set(docData)
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        Toast.makeText(getActivity().getBaseContext(),"Thêm thành công",Toast.LENGTH_SHORT).show();
+////                        Log.d(TAG, "DocumentSnapshot successfully written!");
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(getContext(),"Không thêm được",Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_comment:
 //                Toast.makeText(getContext(),"Click Nhan xet",Toast.LENGTH_SHORT).show();
                 ReviewFragment reviewFragment = new ReviewFragment();
-                getFragmentManager().beginTransaction()
+                getParentFragmentManager().beginTransaction()
                         .replace(R.id.framelayout, reviewFragment).addToBackStack("ratingFragment").commit();
                 break;
             case R.id.imbt_plus:
@@ -220,6 +239,7 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
                 break;
             case R.id.fab_add:
                 addToCart(productCurrent.getId(),quantityCurrent);
+//                addToCartv2(productCurrent,quantityCurrent);
                 break;
 
         }

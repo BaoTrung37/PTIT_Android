@@ -2,6 +2,7 @@ package com.example.appfood.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,11 @@ import com.example.appfood.interfaces.IFragmentCartShoppingCartListener;
 import com.example.appfood.model.Product;
 import com.example.appfood.model.ProductItem;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -33,6 +36,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CartShoppingCartFragment extends Fragment implements View.OnClickListener, IFragmentCartShoppingCartListener {
 
@@ -51,7 +55,6 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart_shopping_cart, container, false);
-
         return view;
     }
 
@@ -145,6 +148,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
                                 cartProductList.add(productItem);
                                 cartShoppingCartListAdapter.setList(cartProductList);
                             }
+                            Database.shoppingCartList = cartProductList;
                             setTotalPrice();
                             progress.dismiss();
                         }
@@ -152,6 +156,31 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
                 });
 
     }
+
+//    private void getShoppingCart2() {
+//        ProgressDialog progress = new ProgressDialog(getContext());
+//        progress.setTitle("Loading");
+//        progress.setMessage("Wait while loading...");
+//        progress.setCancelable(false);
+//        progress.show();
+//
+//        db.collection("cart")
+//                .document(user.getUid())
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            Log.d("aaa",task.getResult().get("shoppingCart").toString());
+//                            Map<String,Object> productItems = task.getResult().getData();
+//                            Log.d("bbb", productItems.get("check").toString());
+//                        }
+//                        progress.dismiss();
+//                    }
+//                });
+//
+//    }
+
 
     @Override
     public void onResume() {
@@ -162,7 +191,6 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
     private void getData() {
         cartProductList = new ArrayList<>();
         getShoppingCart();
-
     }
 
 

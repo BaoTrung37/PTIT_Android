@@ -48,6 +48,7 @@
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart_ordersdelivering.xml" value="0.25" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart_orderspending.xml" value="0.25" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_cart_shopping_cart.xml" value="0.264" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_detail_order.xml" value="0.25" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_home.xml" value="0.24003623188405798" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_home_product_detail.xml" value="0.264" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_payment.xml" value="0.25" />
@@ -61,7 +62,7 @@
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_update_password.xml" value="0.3625" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/fragment_update_sex.xml" value="0.3625" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_cart_orderspending.xml" value="0.25226449275362317" />
-        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_cart_orderspending_list.xml" value="0.25" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_cart_orderspending_list.xml" value="0.5" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_cart_product_order_list.xml" value="0.25" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_cart_shopping_cart_list.xml" value="0.33783783783783783" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragment_search_category_list.xml" value="0.75" />
@@ -71,9 +72,11 @@
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragmet_home_list_product.xml" value="0.24003623188405798" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_fragmet_home_product_detail_list_product.xml" value="0.24003623188405798" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_loading.xml" value="0.1453125" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_product_order_detail.xml" value="0.25" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/item_review_list.xml" value="0.38087774294670845" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/layout/search_product_fragment.xml" value="0.23369565217391305" />
         <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/menu/menu_avatar.xml" value="0.25" />
+        <entry key="..\:/_Tai lieu tren lop/_CNPM - ki 2 nam 4/Android/Code tren lop/PTIT_Android/app/src/main/res/menu/menu_bottomnav.xml" value="0.3625" />
       </map>
     </option>
   </component>

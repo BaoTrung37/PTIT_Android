@@ -24,8 +24,8 @@ import java.util.Map;
 
 public class Database {
 
-    static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     public static List<Product> productList = new ArrayList<>();
     public static List<Category> categoryList = new ArrayList<>();
     public static List<ProductItem> shoppingCartList = new ArrayList<>();
@@ -96,7 +96,6 @@ public class Database {
                         category.setTitle((String) document.get("title"));
                         category.setImageUrl((String) document.get("imageUrl"));
                         categoryList.add(category);
-                        Log.d("test", "test");
                     }
                 } else {
                 }
