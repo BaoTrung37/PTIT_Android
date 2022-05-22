@@ -9,9 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfood.R;
+import com.example.appfood.adapter.OrderDetailProductAdapter;
 import com.example.appfood.model.Order;
 import com.example.appfood.model.ProductItem;
 
@@ -23,6 +25,9 @@ import java.util.List;
 public class DetailOrderFragment extends Fragment {
     DecimalFormat dfVND = new DecimalFormat("###,###,###,###");
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+
+    OrderDetailProductAdapter orderDetailProductAdapter;
+
     TextView tvAddress,tvTotalPrice,tvTotalPayment,tvDateCreate,tvNote;
     RecyclerView recProductOrderList;
     List<ProductItem> productOrderList;
@@ -43,11 +48,17 @@ public class DetailOrderFragment extends Fragment {
     }
 
     private void setData() {
+
+        orderDetailProductAdapter = new OrderDetailProductAdapter(productOrderList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+        recProductOrderList.setLayoutManager(layoutManager);
+        recProductOrderList.setAdapter(orderDetailProductAdapter);
+
         tvTotalPrice.setText(dfVND.format(order.getTotalPrice()) + " đ");
         tvTotalPayment.setText(dfVND.format(order.getTotalPayment()) + " đ");
         tvNote.setText(order.getNote());
         tvDateCreate.setText("Đã tạo: " + dateFormat.format(order.getDateCreate().toDate()));
-
+        tvAddress.setText(order.getAddress());
     }
 
     private void initData() {

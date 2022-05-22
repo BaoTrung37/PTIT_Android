@@ -42,7 +42,7 @@
                         android:src="@drawable/img_ic_badge" />
 
                     <TextView
-                        android:id="@+id/item_title"
+                        android:id="@+id/item_tv_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -54,6 +54,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/item_tv_price"
                     android:paddingLeft="10dp"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
@@ -81,8 +82,9 @@
                             android:layout_marginRight="5dp"
                             android:gravity="center"
                             android:text="SL: " />
+
                         <TextView
-                            android:id="@+id/item_quantity"
+                            android:id="@+id/item_tv_quantity"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="5dp"

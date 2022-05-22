@@ -86,6 +86,7 @@ public class CartOrdersPendingFragment extends Fragment implements IOrderDetailL
                                 order.setTotalPrice(doc.getDouble("totalPrice"));
                                 order.setTotalPayment(doc.getDouble("totalPayment"));
                                 order.setDateCreate(doc.getTimestamp("dateCreate"));
+                                order.setAddress(doc.getString("address"));
                                 List<Map<String, Object>> cart = (List<Map<String, Object>>) doc.get("productOrder");
                                 List<ProductItem> productOrder = new ArrayList<>();
                                 for (int i = 0; i < cart.size(); i++) {

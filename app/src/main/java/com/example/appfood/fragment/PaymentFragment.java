@@ -120,10 +120,10 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, I
     private void doOrder() {
 
         Map<String, Object> data = new HashMap<>();
-        data.put("username", Database.user.getDisplayName());
         data.put("productOrder", productItemList);
         data.put("note", edtNote.getText().toString().trim());
         data.put("totalPrice", totalPrice);
+        data.put("address",tvAddress.getText());
         data.put("totalPayment", totalPayment);
         data.put("dateCreate", new Timestamp(new Date()));
         data.put("orderStatus", 0);
