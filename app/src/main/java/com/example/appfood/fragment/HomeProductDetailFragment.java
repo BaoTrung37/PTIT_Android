@@ -95,8 +95,10 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
         recyclerProductList = view.findViewById(R.id.recycler_product_list);
         productList = new ArrayList<>();
         ///
-        homeProductDetailFragmentListProductAdapter = new HomeProductDetailFragmentListProductAdapter(productList);
         fragmentProductDetailPresenter = new FragmentProductDetailPresenter(this);
+        homeProductDetailFragmentListProductAdapter = new HomeProductDetailFragmentListProductAdapter(productList);
+        homeProductDetailFragmentListProductAdapter.setFragmentProductDetailPresenter(fragmentProductDetailPresenter);
+
         ///
         RecyclerView.LayoutManager layoutManagerProduct = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         recyclerProductList.setLayoutManager(layoutManagerProduct);
@@ -249,5 +251,11 @@ public class HomeProductDetailFragment extends Fragment implements View.OnClickL
     public void onClick(int quantity) {
         quantityCurrent = quantity;
         tvQuantity.setText(quantityCurrent +"");
+    }
+
+    @Override
+    public void onClickProduct(Product product) {
+        productCurrent = product;
+        updateUi();
     }
 }
