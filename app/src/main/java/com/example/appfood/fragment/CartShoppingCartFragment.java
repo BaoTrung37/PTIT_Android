@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,6 +64,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         super.onViewCreated(view, savedInstanceState);
         getData();
         initData(view);
+        removeItem();
     }
 
     @Override
@@ -155,6 +157,28 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
                     }
                 });
 
+    }
+
+    private void removeItem(){
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            public boolean onMove(RecyclerView recyclerView,
+                                  RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                    final int fromPos = viewHolder.getAdapterPosition();
+//                    final int toPos = viewHolder.getAdapterPosition();
+//                    // move item in `fromPos` to `toPos` in adapter.
+                return true;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                //Remove swiped item from list and notify the RecyclerView
+//                cartShoppingCartListAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                cartShoppingCartListAdapter.removeProduct(viewHolder.getAdapterPosition());
+            }
+
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerShoppingCartList);
     }
 
     @Override

@@ -20,10 +20,19 @@ public class NotificationApp extends Application {
    }
 
    private void createChannelNotification() {
-      if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-         NotificationChannel channel = new NotificationChannel(CHANNEL_ID,"PushNotification", NotificationManager.IMPORTANCE_DEFAULT);
-         NotificationManager manager = getSystemService(NotificationManager.class);
-         manager.createNotificationChannel(channel);
+//      if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//         NotificationChannel channel = new NotificationChannel(CHANNEL_ID,"PushNotification", NotificationManager.IMPORTANCE_DEFAULT);
+//         NotificationManager manager = getSystemService(NotificationManager.class);
+//         manager.createNotificationChannel(channel);
+//      }
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+         CharSequence name = "BaoTrungShop";
+         String description = "Đặt hàng thành công. Hãy kiểm tra lại giỏ hàng";
+         int importance = NotificationManager.IMPORTANCE_DEFAULT;
+         NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+         channel.setDescription(description);
+         NotificationManager notificationManager = getSystemService(NotificationManager.class);
+         notificationManager.createNotificationChannel(channel);
       }
    }
 }

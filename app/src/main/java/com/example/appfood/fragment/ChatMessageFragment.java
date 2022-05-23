@@ -101,7 +101,7 @@ public class ChatMessageFragment extends Fragment {
     private void getData() {
         chatList = new ArrayList<>();
         messageAdapter = new MessageAdapter(getContext(),chatList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         recChatMess.setLayoutManager(layoutManager);
         recChatMess.setAdapter(messageAdapter);
 
