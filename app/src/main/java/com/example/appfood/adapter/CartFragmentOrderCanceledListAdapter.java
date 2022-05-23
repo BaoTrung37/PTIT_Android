@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 
 public class CartFragmentOrderCanceledListAdapter extends RecyclerView.Adapter<CartFragmentOrderCanceledListAdapter.ViewHolder> {
@@ -33,7 +34,9 @@ public class CartFragmentOrderCanceledListAdapter extends RecyclerView.Adapter<C
     }
 
     public void setOrderList(List<Order> orderList) {
+        Collections.reverse(orderList);
         this.orderList = orderList;
+
         notifyDataSetChanged();
     }
 
