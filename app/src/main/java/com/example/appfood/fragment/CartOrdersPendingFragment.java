@@ -130,4 +130,19 @@ public class CartOrdersPendingFragment extends Fragment implements IOrderDetailL
                 .replace(R.id.framelayout,detailOrderFragment)
                 .addToBackStack("detailOrderFragment").commit();
     }
+
+    @Override
+    public void onChangeStatus(String id,int status) {
+        db.collection("user")
+                .document(user.getUid())
+                .collection("order")
+                .document(id)
+                .update("orderStatus",status)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        initData();
+                    }
+                });
+    }
 }

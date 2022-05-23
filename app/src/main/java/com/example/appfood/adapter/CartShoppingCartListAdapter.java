@@ -1,5 +1,8 @@
 package com.example.appfood.adapter;
 
+import static com.example.appfood.database.Database.db;
+import static com.example.appfood.database.Database.user;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appfood.R;
 import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentCartShoppingCartListener;
-import com.example.appfood.model.Product;
 import com.example.appfood.model.ProductItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 // TODO: Implement CartShoppingCart
 public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppingCartListAdapter.ViewHolder> {
@@ -44,22 +46,38 @@ public class CartShoppingCartListAdapter extends RecyclerView.Adapter<CartShoppi
         this.list = list;
     }
 
-    public void setCheckAll(boolean isCheck){
-        for(ProductItem productItem: list){
-            productItem.setCheck(isCheck);
-        }
-        iFragmentCartShoppingCartListener.setTotalPrice(getTotalPrice());
-        notifyDataSetChanged();
+    public void removeProduct(int pos) {
+        db.collection("cart")
+                .document(user.getUid())
+                .collection("product")
+                .document(list.get(pos).getProduct().getId())
+                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        list.remove(pos);
+                        notifyDataSetChanged();
+                    }
+                });
     }
-    public boolean isCheckAll(){
-        for(ProductItem productItem: list){
-            if(!productItem.isCheck()){
+
+    public boolean isCheckAll() {
+        for (ProductItem productItem : list) {
+            if (!productItem.isCheck()) {
                 return false;
             }
         }
         return true;
     }
-    public List<ProductItem> getProductItemChecked(){
+
+    public void setCheckAll(boolean isCheck) {
+        for (ProductItem productItem : list) {
+            productItem.setCheck(isCheck);
+        }
+        iFragmentCartShoppingCartListener.setTotalPrice(getTotalPrice());
+        notifyDataSetChanged();
+    }
+
+    public List<ProductItem> getProductItemChecked() {
         List<ProductItem> productItemList = new ArrayList<>();
         for(ProductItem productItem: list){
             if(productItem.isCheck()){

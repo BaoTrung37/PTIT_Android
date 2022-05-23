@@ -10,10 +10,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,6 +65,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
         super.onViewCreated(view, savedInstanceState);
         getData();
         initData(view);
+        removeItem();
     }
 
     @Override
@@ -157,30 +160,28 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
 
     }
 
-//    private void getShoppingCart2() {
-//        ProgressDialog progress = new ProgressDialog(getContext());
-//        progress.setTitle("Loading");
-//        progress.setMessage("Wait while loading...");
-//        progress.setCancelable(false);
-//        progress.show();
-//
-//        db.collection("cart")
-//                .document(user.getUid())
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            Log.d("aaa",task.getResult().get("shoppingCart").toString());
-//                            Map<String,Object> productItems = task.getResult().getData();
-//                            Log.d("bbb", productItems.get("check").toString());
-//                        }
-//                        progress.dismiss();
-//                    }
-//                });
-//
-//    }
+    private void removeItem(){
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            public boolean onMove(RecyclerView recyclerView,
+                                  RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                    final int fromPos = viewHolder.getAdapterPosition();
+//                    final int toPos = viewHolder.getAdapterPosition();
+//                    // move item in `fromPos` to `toPos` in adapter.
+                return true;
+            }
 
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                //Remove swiped item from list and notify the RecyclerView
+//                cartShoppingCartListAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                cartShoppingCartListAdapter.removeProduct(viewHolder.getAdapterPosition());
+                Toast.makeText(getContext(),"Bạn đã xoá sản phẩm thành công", Toast.LENGTH_SHORT).show();
+            }
+
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerShoppingCartList);
+    }
 
     @Override
     public void onResume() {

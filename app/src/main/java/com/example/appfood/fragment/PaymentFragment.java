@@ -17,9 +17,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.appfood.MainActivity;
 import com.example.appfood.R;
+import com.example.appfood.application.NotificationApp;
 import com.example.appfood.database.Database;
 import com.example.appfood.interfaces.IFragmentPaymentListener;
 import com.example.appfood.model.ProductItem;
@@ -140,6 +144,12 @@ public class PaymentFragment extends Fragment implements View.OnClickListener, I
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),
+                                NotificationApp.CHANNEL_ID).setContentTitle("BaoTrungStore")
+                                .setSmallIcon(R.drawable.ic_launcher_background)
+                                .setContentText("Bạn đã đặt hàng thành công");
+                        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(getActivity().getApplicationContext());
+                        managerCompat.notify(0,builder.build());
 
                         moveToPageOrderSpending();
                     }

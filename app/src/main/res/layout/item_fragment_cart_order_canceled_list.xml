@@ -2,13 +2,13 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -176,11 +176,11 @@
             app:layout_constraintTop_toTopOf="@+id/tv_datao" />
 
         <TextView
-            android:id="@+id/tv_vuilongcho"
+            android:id="@+id/tv_Cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Vui lòng đợi xử lý"
+            android:text="Được huỷ bởi bạn"
             android:textColor="@color/black"
             android:textSize="12dp"
             android:textStyle="italic"
@@ -188,12 +188,12 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_datao" />
 
         <Button
-            android:id="@+id/item_bt_cancel"
+            android:id="@+id/item_bt_order_again"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimary"
-            android:text="Huỷ đơn"
+            android:text="Đánh giá"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="12dp"

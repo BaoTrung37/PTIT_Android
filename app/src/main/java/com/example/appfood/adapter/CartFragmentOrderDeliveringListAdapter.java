@@ -20,11 +20,11 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class CartFragmentOrderPendingListAdapter extends RecyclerView.Adapter<CartFragmentOrderPendingListAdapter.ViewHolder> {
+public class CartFragmentOrderDeliveringListAdapter extends RecyclerView.Adapter<CartFragmentOrderDeliveringListAdapter.ViewHolder> {
     List<Order> orderList;
     CartFragmentOrderPresenter cartFragmentOrderPresenter;
 
-    public CartFragmentOrderPendingListAdapter(List<Order> orderList) {
+    public CartFragmentOrderDeliveringListAdapter(List<Order> orderList) {
         this.orderList = orderList;
     }
 
@@ -40,7 +40,7 @@ public class CartFragmentOrderPendingListAdapter extends RecyclerView.Adapter<Ca
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_cart_orderspending_list,parent,true);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_cart_order_delivering_list,parent,true);
         return new ViewHolder(view);
     }
 
@@ -65,7 +65,7 @@ public class CartFragmentOrderPendingListAdapter extends RecyclerView.Adapter<Ca
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView image;
         TextView id,name,quantity,totalPrice,totalPayment,timeCreate;
-        Button btCancel;
+        Button btConfirm;
         CardView item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,11 +76,11 @@ public class CartFragmentOrderPendingListAdapter extends RecyclerView.Adapter<Ca
             totalPrice = itemView.findViewById(R.id.item_tv_totalPrice);
             totalPayment = itemView.findViewById(R.id.item_tv_totalPayment);
             timeCreate = itemView.findViewById(R.id.item_tv_timeCreate);
-            btCancel = itemView.findViewById(R.id.item_bt_cancel);
+            btConfirm = itemView.findViewById(R.id.item_bt_confirm);
             item = itemView.findViewById(R.id.item);
 
             item.setOnClickListener(this);
-            btCancel.setOnClickListener(this);
+            btConfirm.setOnClickListener(this);
         }
 
         @Override
@@ -89,9 +89,10 @@ public class CartFragmentOrderPendingListAdapter extends RecyclerView.Adapter<Ca
                 case R.id.item:
                     cartFragmentOrderPresenter.onClickOrder(orderList.get(getAdapterPosition()));
                     break;
-                case R.id.item_bt_cancel:
-                    cartFragmentOrderPresenter.onClickCanceled(orderList.get(getAdapterPosition()).getId());
+                    case R.id.item_bt_confirm:
+                    cartFragmentOrderPresenter.onClickCompleted( orderList.get(getAdapterPosition()).getId());
                     break;
+
             }
         }
     }
