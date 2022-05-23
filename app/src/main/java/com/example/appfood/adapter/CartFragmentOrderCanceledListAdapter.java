@@ -40,7 +40,7 @@ public class CartFragmentOrderCanceledListAdapter extends RecyclerView.Adapter<C
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_cart_order_canceled_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_cart_order_canceled_list,parent,true);
         return new ViewHolder(view);
     }
 

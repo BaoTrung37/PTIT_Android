@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -174,6 +175,7 @@ public class CartShoppingCartFragment extends Fragment implements View.OnClickLi
                 //Remove swiped item from list and notify the RecyclerView
 //                cartShoppingCartListAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                 cartShoppingCartListAdapter.removeProduct(viewHolder.getAdapterPosition());
+                Toast.makeText(getContext(),"Bạn đã xoá sản phẩm thành công", Toast.LENGTH_SHORT).show();
             }
 
         };
